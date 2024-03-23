@@ -22,32 +22,42 @@ include { workflowCitation          } from '../../nf-core/utils_nfcore_pipeline'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    DEFINE PARAMATER DEPENDENCIES
+    DEFINE DEPENDENCIES (FILES AND WORKFLOWS) FOR OTHER WORKFLOWS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-// Define required workflows based on the current workflow
-// For example:
-// skip_cnv_calling can't be run _with_ skip_short_variant_calling
-// preset "pacbio" can't be run _without_ skip_methylation_wf
+// nf-validation does not support contitional file and params validation,
+// add these here.
 //
-// Add all depenencies for a workflow!
-// Add all required flags for a preset!
-// TODO: Figure out if this could be in a JSON schema
+// For example:
+// Workflow skip_cnv_calling can't be run _with_ skip_short_variant_calling
+// File dipcall_par must be set not using skip_assembly_wf
+// Preset "pacbio" can't be run _without_ skip_methylation_wf
+//
+
 def parameterDependencies = [
     "workflow": [
-        "skip_cnv_calling"   : ["skip_mapping_wf", "skip_short_variant_calling"],
-        "skip_snv_annotation": ["skip_mapping_wf", "skip_short_variant_calling"],
-        "skip_phasing_wf"    : ["skip_mapping_wf", "skip_short_variant_calling"],
-        "skip_repeat_wf"     : ["skip_mapping_wf", "skip_short_variant_calling", "skip_phasing_wf"],
-        "skip_methylation_wf": ["skip_mapping_wf", "skip_short_variant_calling", "skip_phasing_wf"],
-        "skip_qc"            : [],
-        "skip_assembly_wf"   : [],
+        "skip_assembly_wf"          : [],
+        "skip_short_variant_calling": ["skip_mapping_wf"],
+        "skip_snv_annotation"       : ["skip_mapping_wf", "skip_short_variant_calling"],
+        "skip_cnv_calling"          : ["skip_mapping_wf", "skip_short_variant_calling"],
+        "skip_phasing_wf"           : ["skip_mapping_wf", "skip_short_variant_calling"],
+        "skip_repeat_wf"            : ["skip_mapping_wf", "skip_short_variant_calling", "skip_phasing_wf"],
+        "skip_methylation_wf"       : ["skip_mapping_wf", "skip_short_variant_calling", "skip_phasing_wf"],
+    ],
+    "files": [
+        "dipcall_par"    : ["skip_assembly_wf"],
+        "snp_db"         : ["skip_snv_annotation"],
+        "vep_cache"      : ["skip_snv_annotation"],
+        "hificnv_xy"     : ["skip_cnv_calling"],
+        "hificnv_xx"     : ["skip_cnv_calling"],
+        "hificnv_exclude": ["skip_cnv_calling"],
+        "trgt_repeats"   : ["skip_repeat_wf"],
     ],
     "preset": [
         "pacbio" : ["skip_methylation_wf"],
         "ONT_R10": ["skip_assembly_wf", "skip_cnv_calling"],
-        "revio"  : []
+        "revio"  : [],
     ]
 ]
 
@@ -60,7 +70,17 @@ def parameterStatus = [
         skip_snv_annotation:        params.skip_snv_annotation,
         skip_cnv_calling:           params.skip_cnv_calling,
         skip_mapping_wf:            params.skip_mapping_wf,
-        skip_qc:                    params.skip_qc
+        skip_qc:                    params.skip_qc,
+        skip_assembly_wf:           params.skip_assembly_wf,
+    ],
+    "files": [
+        dipcall_par    : params.dipcall_par,
+        snp_db         : params.snp_db,
+        vep_cache      : params.vep_cache,
+        hificnv_xy     : params.hificnv_xy,
+        hificnv_xx     : params.hificnv_xx,
+        hificnv_exclude: params.hificnv_exclude,
+        trgt_repeats   : params.trgt_repeats,
     ],
     "preset": [
         pacbio : params.preset == "pacbio",
@@ -288,8 +308,17 @@ def validateParameterCombinations(combinationsMap, statusMap) {
         args.each { arg, argIsActive ->
             // Collect what workflows are needed for a preset / or workflow(s) that depend on a workflow
             // Or lookup all workflows that depend on the skip (workflow)
-            def dependencies = (argType == "preset") ? combinationsMap[argType][arg] : getSkipsWithWorkflowDependency(arg, combinationsMap[argType])
-            def dependencyString = dependencies.collect { "--$it" }.join(", ")
+            def dependencies
+            if (argType == "preset") {
+                dependencies = combinationsMap[argType][arg]
+            } else if (argType == "workflow"){
+                dependencies = getSkipsWithWorkflowDependency(arg, combinationsMap[argType])
+            } else if (argType == "files") {
+                // Not the most graceful solution but it works
+                checkFileDependencies(arg, combinationsMap, statusMap, errors)
+                return // Exit early
+            }
+            def dependencyString = dependencies.collect { "--$it" }.join(" ")
             // If arg is set on the command line and has dependencies not currently active
             if (argIsActive && dependencyString) {
                 formattedArg = (argType == "preset") ? "--preset " + arg : "--" + arg
@@ -312,4 +341,21 @@ def validateParameterCombinations(combinationsMap, statusMap) {
 def getSkipsWithWorkflowDependency(String workflow, map) {
     def keys = map.findAll { it.value.contains(workflow) }.keySet()
     return keys as List
+}
+//
+// Lookup if a file is required by any workflows, and add to errors
+//
+def checkFileDependencies(String fileParam, Map combinationsMap, Map statusMap, List errors) {
+    // Get the the workflow required by file
+    def workflowThatRequiresFile = combinationsMap["files"][fileParam][0]
+    // Get status of that workflow
+    def WorkflowIsOff = statusMap["workflow"][workflowThatRequiresFile]
+    def WorkflowIsActive = !WorkflowIsOff
+    // Get the file path
+    def FilePath = statusMap["files"][fileParam]
+    // If the workflow that requires the file is active & theres no file available
+    if(WorkflowIsActive && FilePath == null) {
+        errors << "When running without $workflowThatRequiresFile, --$fileParam is required."
+    }
+    return errors
 }
