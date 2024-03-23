@@ -58,20 +58,32 @@ workflow SKIERFE {
     ch_fasta          = Channel.fromPath(params.fasta).map { it -> [it.simpleName, it] }.collect()
 
     // Optional input files
-    ch_extra_snfs      = params.extra_snfs      ? Channel.fromSamplesheet('extra_snfs' , immutable_meta: false)                 : Channel.empty()
-    ch_extra_gvcfs     = params.extra_gvcfs     ? Channel.fromSamplesheet('extra_gvcfs', immutable_meta: false)                 : Channel.empty()
-    ch_tandem_repeats  = params.tandem_repeats  ? Channel.fromPath(params.tandem_repeats).collect()                             : Channel.value([])
-    ch_bed             = params.bed             ? Channel.fromPath(params.bed).map{ [ it.getSimpleName(), it]}.collect()        : Channel.empty()
-    ch_input_bed       = params.bed             ? Channel.fromPath(params.bed).map{ [ it.getSimpleName(), it]}.collect()        : Channel.value([])
+    ch_extra_snfs      = params.extra_snfs      ? Channel.fromSamplesheet('extra_snfs' , immutable_meta: false)
+                                                : Channel.empty()
+    ch_extra_gvcfs     = params.extra_gvcfs     ? Channel.fromSamplesheet('extra_gvcfs', immutable_meta: false)
+                                                : Channel.empty()
+    ch_tandem_repeats  = params.tandem_repeats  ? Channel.fromPath(params.tandem_repeats).collect()
+                                                : Channel.value([])
+    ch_bed             = params.bed             ? Channel.fromPath(params.bed).map{ [ it.getSimpleName(), it]}.collect()
+                                                : Channel.empty()
+    ch_input_bed       = params.bed             ? Channel.fromPath(params.bed).map{ [ it.getSimpleName(), it]}.collect()
+                                                : Channel.value([])
 
     // Conditional input files that has to be set depending on which workflow is run
-    ch_par             = params.dipcall_par     ? Channel.fromPath(params.dipcall_par).collect()                                : ''
-    ch_trgt_bed        = params.trgt_repeats    ? Channel.fromPath(params.trgt_repeats).collect()                               : ''
-    ch_databases       = params.snp_db          ? Channel.fromSamplesheet('snp_db', immutable_meta: false).map{it[1]}.collect() : ''
-    ch_vep_cache       = params.ch_vep_cache    ? Channel.fromPath(params.vep_cache).collect()                                  : ''
-    ch_expected_xy_bed = params.hificnv_xy      ? Channel.fromPath(params.hificnv_xy).collect()                                 : ''
-    ch_expected_xx_bed = params.hificnv_xx      ? Channel.fromPath(params.hificnv_xx).collect()                                 : ''
-    ch_exclude_bed     = params.hificnv_exclude ? Channel.fromPath(params.hificnv_exclude).collect()                            : ''
+    ch_par             = params.dipcall_par     ? Channel.fromPath(params.dipcall_par).collect()
+                                                : ''
+    ch_trgt_bed        = params.trgt_repeats    ? Channel.fromPath(params.trgt_repeats).collect()
+                                                : ''
+    ch_databases       = params.snp_db          ? Channel.fromSamplesheet('snp_db', immutable_meta: false).map{it[1]}.collect()
+                                                : ''
+    ch_vep_cache       = params.ch_vep_cache    ? Channel.fromPath(params.vep_cache).collect()
+                                                : ''
+    ch_expected_xy_bed = params.hificnv_xy      ? Channel.fromPath(params.hificnv_xy).collect()
+                                                : ''
+    ch_expected_xx_bed = params.hificnv_xx      ? Channel.fromPath(params.hificnv_xx).collect()
+                                                : ''
+    ch_exclude_bed     = params.hificnv_exclude ? Channel.fromPath(params.hificnv_exclude).collect()
+                                                : ''
 
     if(!params.skip_qc) {
 
