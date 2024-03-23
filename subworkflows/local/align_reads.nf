@@ -33,25 +33,15 @@ workflow ALIGN_READS {
 
         // Add meta info for fastp
         ch_sample
-            .map { meta, fastq -> [ meta + [ 'single_end': true ], fastq ] }
             .set { ch_fastp_in }
 
         // To run this params.split_fastq must be >= 250
         FASTP ( ch_fastp_in, [], [], [] )
         ch_versions = ch_versions.mix(FASTP.out.versions)
 
-        // Transpose and remove single_end from meta - how to just remove one element?
+        // Transpose
         FASTP.out.reads
             .transpose()
-            .map{ meta, split_fastq -> [ [
-                'id'         : meta['id'],
-                'family_id'  : meta['family_id'],
-                'paternal_id': meta['paternal_id'],
-                'maternal_id': meta['maternal_id'],
-                'sex'        : meta['sex'],
-                'phenotype'  : meta['phenotype'],
-                ], split_fastq ]
-            }
             .set { ch_split_reads }
 
         MINIMAP2_ALIGN_SPLIT ( ch_split_reads, ch_index, true, false, false )
