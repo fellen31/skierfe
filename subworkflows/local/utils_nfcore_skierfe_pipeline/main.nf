@@ -21,6 +21,55 @@ include { UTILS_NFCORE_PIPELINE     } from '../../nf-core/utils_nfcore_pipeline'
 include { workflowCitation          } from '../../nf-core/utils_nfcore_pipeline'
 
 /*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    DEFINE PARAMATER DEPENDENCIES
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*/
+
+// Define required workflows based on the current workflow
+// For example:
+// skip_cnv_calling can't be run _with_ skip_short_variant_calling
+// preset "pacbio" can't be run _without_ skip_methylation_wf
+//
+// Add all depenencies for a workflow!
+// Add all required flags for a preset!
+// TODO: Figure out if this could be in a JSON schema
+def parameterDependencies = [
+    "workflow": [
+        "skip_cnv_calling"   : ["skip_mapping_wf", "skip_short_variant_calling"],
+        "skip_snv_annotation": ["skip_mapping_wf", "skip_short_variant_calling"],
+        "skip_phasing_wf"    : ["skip_mapping_wf", "skip_short_variant_calling"],
+        "skip_repeat_wf"     : ["skip_mapping_wf", "skip_short_variant_calling", "skip_phasing_wf"],
+        "skip_methylation_wf": ["skip_mapping_wf", "skip_short_variant_calling", "skip_phasing_wf"],
+        "skip_qc"            : [],
+        "skip_assembly_wf"   : [],
+    ],
+    "preset": [
+        "pacbio" : ["skip_methylation_wf"],
+        "ONT_R10": ["skip_assembly_wf", "skip_cnv_calling"],
+        "revio"  : []
+    ]
+]
+
+def parameterStatus = [
+    "workflow": [
+        skip_short_variant_calling: params.skip_short_variant_calling,
+        skip_phasing_wf:            params.skip_phasing_wf,
+        skip_methylation_wf:        params.skip_methylation_wf,
+        skip_repeat_wf:             params.skip_repeat_wf,
+        skip_snv_annotation:        params.skip_snv_annotation,
+        skip_cnv_calling:           params.skip_cnv_calling,
+        skip_mapping_wf:            params.skip_mapping_wf,
+        skip_qc:                    params.skip_qc
+    ],
+    "preset": [
+        pacbio : params.preset == "pacbio",
+        revio  : params.preset == "revio",
+        ONT_R10: params.preset == "ONT_R10",
+    ]
+]
+
+/*
 ========================================================================================
     SUBWORKFLOW TO INITIALISE PIPELINE
 ========================================================================================
@@ -38,7 +87,6 @@ workflow PIPELINE_INITIALISATION {
     input             //  string: Path to input samplesheet
 
     main:
-
     ch_versions = Channel.empty()
 
     //
@@ -65,7 +113,6 @@ workflow PIPELINE_INITIALISATION {
         validate_params,
         "nextflow_schema.json"
     )
-
     //
     // Check config provided to the pipeline
     //
@@ -75,7 +122,7 @@ workflow PIPELINE_INITIALISATION {
     //
     // Custom validation for pipeline parameters
     //
-    validateInputParameters()
+    validateInputParameters(parameterDependencies, parameterStatus)
 
     //
     // Create channel from input file provided through params.input
@@ -112,7 +159,6 @@ workflow PIPELINE_COMPLETION {
     main:
 
     summary_params = paramsSummaryMap(workflow, parameters_schema: "nextflow_schema.json")
-
     //
     // Completion email and summary
     //
@@ -137,8 +183,9 @@ workflow PIPELINE_COMPLETION {
 //
 // Check and validate pipeline parameters
 //
-def validateInputParameters() {
+def validateInputParameters(map, params) {
     genomeExistsError()
+    validateParameterCombinations(map, params)
 }
 
 //
@@ -227,4 +274,42 @@ def methodsDescriptionText(mqc_methods_yaml) {
     def description_html = engine.createTemplate(methods_text).make(meta)
 
     return description_html.toString()
+}
+
+//
+// Validate preset and workflow skip combinations
+//
+def validateParameterCombinations(combinationsMap, statusMap) {
+    // Array to store errors
+    def errors = []
+    // For each command-line argType (preset, workflow-skip)
+    statusMap.each { argType, args ->
+        // Iterate over these arguments
+        args.each { arg, argIsActive ->
+            // Collect what workflows are needed for a preset / or workflow(s) that depend on a workflow
+            // Or lookup all workflows that depend on the skip (workflow)
+            def dependencies = (argType == "preset") ? combinationsMap[argType][arg] : getSkipsWithWorkflowDependency(arg, combinationsMap[argType])
+            def dependencyString = dependencies.collect { "--$it" }.join(", ")
+            // If arg is set on the command line and has dependencies not currently active
+            if (argIsActive && dependencyString) {
+                formattedArg = (argType == "preset") ? "--preset " + arg : "--" + arg
+                errors << "Whenever $formattedArg is active, the pipeline has to be run with: $dependencyString."
+            }
+        }
+    }
+    // Give error if there are any
+    if(errors) {
+        def error_string = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" +
+                           "  " + errors.join("\n  ") + "\n" +
+                           "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        error(error_string)
+    }
+}
+
+//
+// Lookup all other workflows that needs to be active for a certain workflow
+//
+def getSkipsWithWorkflowDependency(String workflow, map) {
+    def keys = map.findAll { it.value.contains(workflow) }.keySet()
+    return keys as List
 }

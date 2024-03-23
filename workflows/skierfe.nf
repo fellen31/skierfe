@@ -4,8 +4,6 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-//include { validateParameters; paramsHelp; paramsSummaryLog; fromSamplesheet } from 'plugin/nf-validation'
-
 // Chech mandatory input files
 ch_fasta          = Channel.fromPath(params.fasta).map { it -> [it.simpleName, it] }.collect()
 
@@ -16,26 +14,6 @@ ch_tandem_repeats = params.tandem_repeats ? Channel.fromPath(params.tandem_repea
 ch_bed            = params.bed            ? Channel.fromPath(params.bed).map{ [ it.getSimpleName(), it]}.collect()  : Channel.empty()
 ch_input_bed      = params.bed            ? Channel.fromPath(params.bed).map{ [ it.getSimpleName(), it]}.collect()  : Channel.value([])
 
-// This should be able to in schema?
-if (params.split_fastq < 250 & params.split_fastq > 0 ) { exit 1, '--split_fastq must be 0 or >= 250'}
-if (params.parallel_snv == 0 ) { exit 1, '--parallel_snv must be > 0'}
-
-def checkUnsupportedCombinations() {
-    if (params.skip_short_variant_calling) {
-        if (params.skip_phasing_wf & !params.skip_methylation_wf) {
-            exit 1, 'Cannot run methylation analysis without short variant calling and phasing'
-        } else if (params.skip_phasing_wf & !params.skip_repeat_wf) {
-            exit 1, 'Cannot run repeat analysis without short variant calling and phasing'
-        } else if (!params.skip_phasing_wf) {
-             exit 1, 'Cannot run phasing analysis without short variant calling'
-        } else if (!params.skip_repeat_wf ) {
-            exit 1, 'Cannot run repeat analysis without short variant calling'
-        } else if (!params.skip_snv_annotation ) {
-            exit 1, 'Cannot run snv annotation without short variant calling'
-        } else if (!params.skip_cnv_calling) {
-            exit 1, 'Cannot run CNV-calling without short variant calling'
-        }
-    }
     if (!params.skip_assembly_wf) {
         // TODO: should be one assembly wf, and one assembly variant calling wf
         if(params.dipcall_par) { ch_par = Channel.fromPath(params.dipcall_par).collect() } else { exit 1, 'Not skipping genome assembly: missing input PAR-file (--dipcall_par)' }
@@ -51,38 +29,10 @@ def checkUnsupportedCombinations() {
     if (!params.skip_short_variant_calling & !params.skip_cnv_calling) {
         if(params.hificnv_xy)      {  ch_expected_xy_bed = Channel.fromPath(params.hificnv_xy).collect()  } else { exit 1, 'Not skipping CNV-calling: Missing --hificnv_xy'}
         if(params.hificnv_xx)      {  ch_expected_xx_bed = Channel.fromPath(params.hificnv_xx).collect()  } else { exit 1, 'Not skipping CNV-calling: Missing --hificnv_xx'}
-        if(params.hificnv_exclude) {  ch_exclude_bed = Channel.fromPath(params.hificnv_exclude).collect() } else { ch_exclude_bed = Channel.value([]) }
+        if(params.hificnv_exclude) {  ch_exclude_bed     = Channel.fromPath(params.hificnv_exclude).collect() } else { ch_exclude_bed = Channel.value([]) }
     }
-}
 
-// Check and set input files that are mandatory for some analyses
-checkUnsupportedCombinations()
 
-// Validate workflows for different presets
-def getValidCallers(preset) {
-    switch(preset) {
-        case "revio":
-            return ["deepvariant"]
-        case "pacbio":
-            return ["deepvariant"]
-        case "ONT_R10":
-            return ["deepvariant"]
-    }
-}
-
-def getValidWorkflows(preset) {
-    switch(preset) {
-        case "pacbio":
-            return ["skip_methylation_wf"]
-        case "ONT_R10":
-            return ["skip_cnv_calling", "skip_assembly_wf"]
-    }
-}
-
-if( (params.preset == "pacbio" & !params.skip_methylation_wf) |
-    (params.preset == "ONT_R10" & (!params.skip_cnv_calling | !params.skip_assembly_wf))) {
-    exit 1, "Preset \'$params.preset\' cannot be run wih: " + getValidWorkflows(params.preset)
-}
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
