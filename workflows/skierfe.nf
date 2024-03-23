@@ -26,8 +26,6 @@ include { SNV_ANNOTATION             } from '../subworkflows/local/snv_annotatio
 // local
 include { FQCRS                  } from '../modules/local/fqcrs'
 include { CONVERT_ONT_READ_NAMES } from '../modules/local/convert_ont_read_names'
-include { BUILD_INTERVALS        } from '../modules/local/build_intervals/main'
-include { SPLIT_BED_CHUNKS       } from '../modules/local/split_bed_chunks/main'
 
 // nf-core
 include { MOSDEPTH               } from '../modules/nf-core/mosdepth/main'
@@ -64,10 +62,8 @@ workflow SKIERFE {
                                                 : Channel.empty()
     ch_tandem_repeats  = params.tandem_repeats  ? Channel.fromPath(params.tandem_repeats).collect()
                                                 : Channel.value([])
-    ch_bed             = params.bed             ? Channel.fromPath(params.bed).map{ [ it.getSimpleName(), it]}.collect()
-                                                : Channel.empty()
     ch_input_bed       = params.bed             ? Channel.fromPath(params.bed).map{ [ it.getSimpleName(), it]}.collect()
-                                                : Channel.value([])
+                                                : Channel.value([[],[]])
 
     // Conditional input files that has to be set depending on which workflow is run
     ch_par             = params.dipcall_par     ? Channel.fromPath(params.dipcall_par).collect()
@@ -84,6 +80,17 @@ workflow SKIERFE {
                                                 : ''
     ch_exclude_bed     = params.hificnv_exclude ? Channel.fromPath(params.hificnv_exclude).collect()
                                                 : ''
+    // Index genome
+
+    make_bed_from_fai = params.bed ? false : true
+
+    PREPARE_GENOME (
+        ch_fasta,
+        ch_input_bed,
+        make_bed_from_fai,
+        params.parallel_snv
+    )
+    ch_versions = ch_versions.mix(PREPARE_GENOME.out.versions)
 
     if(!params.skip_qc) {
 
@@ -96,28 +103,14 @@ workflow SKIERFE {
         ch_versions = ch_versions.mix(FQCRS.out.versions)
     }
 
-    // Index genome
-    PREPARE_GENOME( ch_fasta )
-    ch_versions = ch_versions.mix(PREPARE_GENOME.out.versions)
-
     // Gather indices
     fasta = PREPARE_GENOME.out.fasta
     fai   = PREPARE_GENOME.out.fai
-    mmi   = PREPARE_GENOME.out.mmi
+    bed   = PREPARE_GENOME.out.bed
 
     // Move this inside prepare genome?
 
     // If no BED-file is provided then build intervals from reference
-    if(!params.bed) {
-        fai
-            .map{ name, fai -> [['id':name], fai] }
-            .set{ ch_build_intervals_in }
-
-        BUILD_INTERVALS( ch_build_intervals_in )
-
-        BUILD_INTERVALS.out.bed
-            .set{ ch_bed }
-    }
 
     // Assembly workflow
     if(!params.skip_assembly_wf) {
@@ -134,41 +127,30 @@ workflow SKIERFE {
 
     if(!params.skip_mapping_wf) {
 
-        ALIGN_READS( ch_sample, mmi)
+        ALIGN_READS( ch_sample, fasta )
+        ch_versions = ch_versions.mix(ALIGN_READS.out.versions)
 
-        bam     = ALIGN_READS.out.bam
-        bai     = ALIGN_READS.out.bai
-        bam_bai = ALIGN_READS.out.bam_bai
+        bam_csi = ALIGN_READS.out.bam_csi
 
-
-        // TODO: parallel_snv should only be allowed when snv calling is active
-        // TODO: move inside PREPARE GENOME, but only run if(parallel_snv > 1)
         // Split BED/Genome into equal chunks
-        // 13 is a good number since no bin is larger than chr1 & it will not overload SLURM
 
-        SPLIT_BED_CHUNKS(ch_bed, params.parallel_snv)
+        // Combine to create a bam_csi - chunk pair for each sample
+        bam_csi
+            .combine ( PREPARE_GENOME.out.split_bed.flatten() )
+            .set { ch_snv_calling_in }
 
-        // Combine to create a bam_bai - chunk pair for each sample
-        // Do this here, pre-process or inside SNV-calling?
-        bam_bai
-            .combine(SPLIT_BED_CHUNKS.out
-                    .split_beds
-                    .flatten())
-            .set{ ch_snv_calling_in }
-
-        QC_ALIGNED_READS( bam_bai, fasta, ch_input_bed )
+        QC_ALIGNED_READS( bam_csi, fasta, ch_input_bed )
 
         // Call SVs with Sniffles2
-        STRUCTURAL_VARIANT_CALLING( bam_bai , ch_extra_snfs, fasta, fai, ch_tandem_repeats )
+        STRUCTURAL_VARIANT_CALLING( bam_csi , ch_extra_snfs, fasta, fai, ch_tandem_repeats )
 
         // Gather versions
-        ch_versions = ch_versions.mix(ALIGN_READS.out.versions)
         ch_versions = ch_versions.mix(QC_ALIGNED_READS.out.versions)
         ch_versions = ch_versions.mix(STRUCTURAL_VARIANT_CALLING.out.versions)
 
         if(!params.skip_short_variant_calling) {
             // Call SNVs with DeepVariant/DeepTrio
-            SHORT_VARIANT_CALLING( ch_snv_calling_in , ch_extra_gvcfs, fasta, fai, ch_bed )
+            SHORT_VARIANT_CALLING( ch_snv_calling_in , ch_extra_gvcfs, fasta, fai, bed )
             ch_versions = ch_versions.mix(SHORT_VARIANT_CALLING.out.versions)
 
             if(!params.skip_snv_annotation) {
@@ -177,7 +159,7 @@ workflow SKIERFE {
 
             if(params.preset != 'ONT_R10') {
 
-                bam_bai
+                bam_csi
                     .join(SHORT_VARIANT_CALLING.out.snp_calls_vcf)
                     .groupTuple()
                     .set { cnv_workflow_in }
@@ -192,7 +174,7 @@ workflow SKIERFE {
 
             if(!params.skip_phasing_wf) {
                 // Phase variants with WhatsHap
-                PHASING( SHORT_VARIANT_CALLING.out.snp_calls_vcf, STRUCTURAL_VARIANT_CALLING.out.ch_sv_calls_vcf, bam_bai, fasta, fai)
+                PHASING( SHORT_VARIANT_CALLING.out.snp_calls_vcf, STRUCTURAL_VARIANT_CALLING.out.ch_sv_calls_vcf, bam_csi, fasta, fai)
                 hap_bam_bai = PHASING.out.haplotagged_bam_bai
 
                 // Gather versions
@@ -201,7 +183,7 @@ workflow SKIERFE {
 
                 if(!params.skip_methylation_wf) {
                     // Pileup methylation with modkit
-                    METHYLATION( hap_bam_bai, fasta, fai, ch_bed )
+                    METHYLATION( hap_bam_bai, fasta, fai, ch_input_bed )
 
                     // Gather versions
                     ch_versions = ch_versions.mix(METHYLATION.out.versions)

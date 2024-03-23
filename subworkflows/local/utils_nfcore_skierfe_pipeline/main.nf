@@ -143,6 +143,9 @@ workflow PIPELINE_INITIALISATION {
     // Custom validation for pipeline parameters
     //
     validateInputParameters(parameterDependencies, parameterStatus)
+    // Can't put this in schema, because it does not allow for 0 AND >= 250
+    if (params.split_fastq < 250 && params.split_fastq > 0 ) { exit 1, '--split_fastq must be 0 or >= 250'}
+    // TODO: parallel_snv should only be allowed when snv calling is active
 
     //
     // Create channel from input file provided through params.input
