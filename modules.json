@@ -44,10 +44,11 @@
                     },
                     "bcftools/sort": {
                         "branch": "master",
-                        "git_sha": "682f789f93070bd047868300dd018faf3d434e7c",
+                        "git_sha": "487d92367b4d7bb9f1ca694bf72736be90720b15",
                         "installed_by": [
                             "modules"
-                        ]
+                        ],
+                        "patch": "modules/nf-core/bcftools/sort/bcftools-sort.diff"
                     },
                     "bcftools/view": {
                         "branch": "master",
@@ -55,6 +56,14 @@
                         "installed_by": [
                             "modules"
                         ]
+                    },
+                    "deepvariant": {
+                        "branch": "master",
+                        "git_sha": "199ba086a259e1933d6e0ab7596e4a977bbd483a",
+                        "installed_by": [
+                            "modules"
+                        ],
+                        "patch": "modules/nf-core/deepvariant/deepvariant.diff"
                     },
                     "ensemblvep/vep": {
                         "branch": "master",
@@ -141,6 +150,14 @@
                         "installed_by": [
                             "modules"
                         ]
+                    },
+                    "samtools/fastq": {
+                        "branch": "master",
+                        "git_sha": "f4596fe0bdc096cf53ec4497e83defdb3a94ff62",
+                        "installed_by": [
+                            "modules"
+                        ],
+                        "patch": "modules/nf-core/samtools/fastq/samtools-fastq.diff"
                     },
                     "samtools/index": {
                         "branch": "master",

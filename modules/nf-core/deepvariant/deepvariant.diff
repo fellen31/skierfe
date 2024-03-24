@@ -1,0 +1,42 @@
+Changes in module 'nf-core/deepvariant'
+--- modules/nf-core/deepvariant/main.nf
++++ modules/nf-core/deepvariant/main.nf
+@@ -12,11 +12,11 @@
+     tuple val(meta4), path(gzi)
+ 
+     output:
+-    tuple val(meta), path("${prefix}.vcf.gz")      ,  emit: vcf
+-    tuple val(meta), path("${prefix}.vcf.gz.tbi")  ,  emit: vcf_tbi
+-    tuple val(meta), path("${prefix}.g.vcf.gz")    ,  emit: gvcf
+-    tuple val(meta), path("${prefix}.g.vcf.gz.tbi"),  emit: gvcf_tbi
+-    path "versions.yml"                            ,  emit: versions
++    tuple val(meta), path("*.deepvariant.vcf.gz")    , emit: vcf
++    tuple val(meta), path("*.deepvariant.vcf.gz.tbi"), emit: vcf_tbi
++    tuple val(meta), path("*.g.vcf.gz")              , emit: gvcf
++    tuple val(meta), path("*.g.vcf.gz.tbi")          , emit: gvcf_tbi
++    path "versions.yml"                              , emit: versions
+ 
+     when:
+     task.ext.when == null || task.ext.when
+@@ -27,15 +27,15 @@
+         error "DEEPVARIANT module does not support Conda. Please use Docker / Singularity / Podman instead."
+     }
+     def args = task.ext.args ?: ''
+-    prefix = task.ext.prefix ?: "${meta.id}"
++    //prefix = task.ext.prefix ?: "${meta.id}"
+     def regions = intervals ? "--regions=${intervals}" : ""
+-
++    def output_name = intervals ? "${meta.id}" + "." + "${intervals.getSimpleName()}" : "${meta.id}"
+     """
+     /opt/deepvariant/bin/run_deepvariant \\
+         --ref=${fasta} \\
+         --reads=${input} \\
+-        --output_vcf=${prefix}.vcf.gz \\
+-        --output_gvcf=${prefix}.g.vcf.gz \\
++        --output_vcf=${output_name}.deepvariant.vcf.gz \\
++        --output_gvcf=${output_name}.g.vcf.gz \\
+         ${args} \\
+         ${regions} \\
+         --intermediate_results_dir=. \\
+
+************************************************************

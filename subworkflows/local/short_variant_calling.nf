@@ -1,4 +1,8 @@
-include { DEEPVARIANT                               } from '../../modules/local/google/deepvariant'
+include { DEEPVARIANT                               } from '../../modules/nf-core/deepvariant'
+include { DEEPVARIANT as MAKE_EXAMPLES              } from '../../modules/local/deepvariant/make_examples'
+include { DEEPVARIANT as CALL_VARIANTS              } from '../../modules/local/deepvariant/call_variants'
+include { DEEPVARIANT as CALL_VARIANTS_GPU          } from '../../modules/local/deepvariant/call_variants_gpu'
+include { DEEPVARIANT as POSTPROCESS_VARIANTS       } from '../../modules/local/deepvariant/postprocess_variants'
 include { GLNEXUS                                   } from '../../modules/nf-core/glnexus'
 include { BCFTOOLS_VIEW_REGIONS                     } from '../../modules/local/bcftools/view_regions'
 include { TABIX_TABIX as TABIX_EXTRA_GVCFS          } from '../../modules/nf-core/tabix/tabix/main'
@@ -15,11 +19,11 @@ include { BCFTOOLS_SORT as BCFTOOLS_SORT_DV_VCF     } from '../../modules/nf-cor
 workflow SHORT_VARIANT_CALLING {
 
     take:
-    ch_bam_bai
-    ch_extra_gvcfs
-    ch_fasta
-    ch_fai
-    ch_bed
+    ch_bam_csi     // channel: [ val(meta), bam, csi, split_bed ]
+    ch_extra_gvcfs // channel: [ val(meta), gvcf ] -- broken
+    ch_fasta       // channel: [ val(meta), fasta ]
+    ch_fai         // channel: [ val(meta), fai ]
+    ch_bed         // channel: [ val(meta), bed ]
 
     main:
     ch_snp_calls_vcf  = Channel.empty()
@@ -27,11 +31,36 @@ workflow SHORT_VARIANT_CALLING {
     ch_combined_bcf   = Channel.empty()
     ch_versions       = Channel.empty()
 
-    // Does splitting BAMs and copying to node make sense to reduce IO?
+    DEEPVARIANT ( ch_bam_csi, ch_fasta, ch_fai, [[],[]] )
 
-    // Only one of these is run depending on params.variant_caller (when clause condition is defined in the conf/modules.config)
-    DEEPVARIANT               ( ch_bam_bai, ch_fasta, ch_fai )
+    def start = 0 // Has to be 0
+    def end = 13 // Hsa to be bigger than 0
+    def step = 1 // should be task.cpus - ish
+    // Create a channel for each range
+    Channel.from(start..(end - 1))
+        .collate(step)
+        .map { it -> [ it ] }
+        .set{task}
 
+    ch_bam_csi
+        .map { meta, bam, csi, bed -> [ meta + [ 'bed': bed.name ], bam, csi, bed ] }
+        .combine(task)
+        .set { ch_make_examples }
+    MAKE_EXAMPLES ( ch_make_examples, ch_fasta, ch_fai, [[],[]], end )
+
+    ch_called_variants = Channel.empty()
+    if(params.gpu) {
+        CALL_VARIANTS_GPU ( MAKE_EXAMPLES.out.examples.transpose(), end )
+        ch_called_variants = CALL_VARIANTS_GPU.out.variants
+    } else {
+        CALL_VARIANTS ( MAKE_EXAMPLES.out.examples.transpose(), end )
+        ch_called_variants = CALL_VARIANTS.out.variants
+    }
+    ch_called_variants
+        .groupTuple()
+        .join(MAKE_EXAMPLES.out.gvcf.transpose().groupTuple())
+        .set { ch_postprocess_variants }
+    POSTPROCESS_VARIANTS ( ch_postprocess_variants, ch_fasta, ch_fai, end )
     // Collect VCFs
     ch_snp_calls_vcf  = ch_snp_calls_vcf.mix(DEEPVARIANT.out.vcf)
 
