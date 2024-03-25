@@ -1,6 +1,6 @@
 ## warning: This information is incomplete!
 
-# genomic-medicine-sweden/skierfe: Output
+# genomic-medicine-sweden/nallo: Output
 
 ## Introduction
 
