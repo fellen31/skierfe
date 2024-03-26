@@ -2,17 +2,18 @@ process BCFTOOLS_SORT {
     tag "$meta.id"
     label 'process_medium'
 
-    conda "bioconda::bcftools=1.17"
+    conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/bcftools:1.17--haef29d1_0':
-        'biocontainers/bcftools:1.17--haef29d1_0' }"
+        'https://depot.galaxyproject.org/singularity/bcftools:1.18--h8b25389_0':
+        'biocontainers/bcftools:1.18--h8b25389_0' }"
 
     input:
     tuple val(meta), path(vcf)
 
     output:
-    tuple val(meta), path("*.{vcf,vcf.gz,bcf,bcf.gz}")  , emit: vcf
-    path "versions.yml"                                 , emit: versions
+    tuple val(meta), path("*.{vcf,vcf.gz,bcf,bcf.gz}"), emit: vcf
+    tuple val(meta), path("*.csi")                    , emit: csi, optional: true
+    path "versions.yml"                               , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -30,6 +31,7 @@ process BCFTOOLS_SORT {
     bcftools \\
         sort \\
         --output ${prefix}.sorted.${extension} \\
+        --temp-dir . \\
         $args \\
         $vcf
 
@@ -50,7 +52,7 @@ process BCFTOOLS_SORT {
                     "vcf"
 
     """
-    touch ${prefix}.${extension}
+    touch ${prefix}.sorted.${extension}
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
