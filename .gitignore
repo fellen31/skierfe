@@ -5,4 +5,5 @@ results/
 .DS_Store
 testing/
 testing*
+.nf-test*
 *.pyc
