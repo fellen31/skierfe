@@ -154,7 +154,7 @@ workflow NALLO {
         // Split fastq
         if (params.split_fastq > 0) {
 
-            FASTP( ch_sample, [], [], [] )
+            FASTP( ch_sample, [], [], [], [] )
             ch_versions = ch_versions.mix(FASTP.out.versions)
 
             reads_for_alignment = FASTP.out.reads.transpose()

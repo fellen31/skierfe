@@ -76,7 +76,7 @@ Changes in module 'nf-core/sniffles'
  
      when:
      task.ext.when == null || task.ext.when
-@@ -23,18 +26,39 @@
+@@ -23,17 +26,39 @@
      script:
      def args = task.ext.args ?: ''
      def prefix = task.ext.prefix ?: "${meta.id}"
@@ -119,6 +119,6 @@ Changes in module 'nf-core/sniffles'
 +    """
 +    
  }
- 
++
 
 ************************************************************

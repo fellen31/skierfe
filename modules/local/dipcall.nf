@@ -1,10 +1,11 @@
-//TODO: Mapper choice
 process DIPCALL {
     tag "$meta.id"
     label 'process_high'
 
     conda "bioconda::dipcall=0.3"
-    container "quay.io/biocontainers/dipcall:0.3--hdfd78af_0"
+    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+        'https://depot.galaxyproject.org/singularity/dipcall:0.3--hdfd78af_0':
+        'biocontainers/dipcall:0.3--hdfd78af_0' }"
 
     // This is bad but I don't know where it's going wrong, a test dataset is really needed for this process
     // Could change to a subworkflow as well...
@@ -31,7 +32,6 @@ process DIPCALL {
     tuple val(meta), path("*.pair.vcf.gz"), emit: pair
     tuple val(meta), path("*.tmp")        , emit: tmp, optional: true
     path "versions.yml"                   , emit: versions
-    //TODO: Add all outputs
 
     when:
     task.ext.when == null || task.ext.when

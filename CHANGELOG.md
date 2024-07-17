@@ -33,12 +33,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#250](https://github.com/genomic-medicine-sweden/nallo/pull/250) - Run mosdepth with `--fast-mode` and add to MultiQC report
 - [#251](https://github.com/genomic-medicine-sweden/nallo/pull/251) - Switched from annotating single sample VCFs to annotating a multisample VCF, splitting the VCF per sample afterwards to keep outputs almost consistent
 - [#256](https://github.com/genomic-medicine-sweden/nallo/pull/256) - Changed Stranger to annotate single-sample VCFs instead of a multi-sample VCF
+- [#](https://github.com/genomic-medicine-sweden/nallo/pull/) - Updated modules and removed obsolete TODO statements
+- [#](https://github.com/genomic-medicine-sweden/nallo/pull/) - Updated the hifiasm test profile parameters for quicker tests
 
 ### `Removed`
 
 - [#237](https://github.com/genomic-medicine-sweden/nallo/pull/237) - Removed the CONVERT_ONT_READNAMES module that was run before calling repeats with TRGT
 - [#238](https://github.com/genomic-medicine-sweden/nallo/pull/238) - Removed the `--extra_gvcfs` parameter
 - [#243](https://github.com/genomic-medicine-sweden/nallo/pull/243) - Removed VEP report from output files
+- [#](https://github.com/genomic-medicine-sweden/nallo/pull/) - Removed obsolete TODO statements
 
 ### `Fixed`
 
@@ -53,6 +56,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | `--extra_gvcfs`    |                            |
 | `--skip_repeat_wf` | `--skip_repeat_calling`    |
 | `--skip_repeat_wf` | `--skip_repeat_annotation` |
+
+### Module updates
+
+| Tool        | Old version | New version |
+| ----------- | ----------- | ----------- |
+| deepvariant | 1.5.0       | 1.6.1       |
+| somalier    | 0.2.15      | 0.2.19      |
 
 ## v0.2.0 - [2024-06-26]
 
