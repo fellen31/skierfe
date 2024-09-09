@@ -1,10 +1,9 @@
 nextflow_workflow {
 
-    name "Test Workflow SNV_ANNOTATION"
-    script "../"
-    workflow "SNV_ANNOTATION"
+    name "Test Workflow RANK_VARIANTS"
+    script "../main.nf"
+    workflow "RANK_VARIANTS"
     config "./nextflow.config"
-    tag "SNV_ANNOTATION"
 
     setup {
         run("GUNZIP") {
@@ -75,13 +74,9 @@ nextflow_workflow {
                 """
             }
         }
-
-    }
-
-    test("bcf, db, vep_cache, '110'") {
-
-        when {
-            workflow {
+        run("SNV_ANNOTATION") {
+            script "../../snv_annotation/main.nf"
+            process {
                 """
                 input[0] = SHORT_VARIANT_CALLING.out.combined_bcf
                 input[1] = [
@@ -92,9 +87,9 @@ nextflow_workflow {
                 input[4] = UNTAR.out.untar.map { meta, cache -> cache }
                 input[5] = Channel.value('110')
                 input[6] = true
-                input[7] = [
+                input[7] = Channel.of([
                     file(params.pipelines_testdata_base_path + 'nallo/reference/vep_plugin_files.csv', checkIfExists: true)
-                ]
+                ])
                 input[8] = false
                 input[9] = Channel.value([])
                 input[10] = null
@@ -102,45 +97,83 @@ nextflow_workflow {
                 """
             }
         }
+        run("ANNOTATE_CSQ_PLI") {
+            script "../../../../subworkflows/local/annotate_consequence_pli.nf"
+            process {
+                """
+                input[0] = SNV_ANNOTATION.out.vcf
+                input[1] = [
+                    [ id: 'variant_consequences' ],
+                    [ file(params.pipelines_testdata_base_path + 'nallo/reference/variant_consequences_v2.txt', checkIfExists: true) ]
+                ]
+                """
+            }
+        }
+
+        run("CREATE_PEDIGREE_FILE") {
+            script "../../../../modules/local/create_pedigree_file.nf"
+            process {
+                """
+                input[0] = [
+                    'project',
+                    [
+                        [ id: 'test', project: 'project', maternal_id: '0', paternal_id: '0', family_id: 'family', sex: '2', phenotype: '2' ]
+                    ]
+                ]
+                """
+            }
+        }
+    }
+
+    test("1 sample") {
+
+        when {
+            workflow {
+                """
+                input[0] = ANNOTATE_CSQ_PLI.out.vcf
+                input[1] = CREATE_PEDIGREE_FILE.out.ped
+                input[2] = Channel.of([
+                    [ id: 'reduced_penetrance' ],
+                    file(params.pipelines_testdata_base_path + 'nallo/reference/reduced_penetrance.tsv', checkIfExists: true)
+                ])
+                input[3] = Channel.of([
+                    [ id: 'score_config_snv' ],
+                    file(params.pipelines_testdata_base_path + 'nallo/reference/rank_model_snv.ini', checkIfExists: true)
+                ])
+                """
+            }
+        }
 
         then {
             assertAll(
                 { assert workflow.success },
+                { assert workflow.out.vcf.get(0).get(1).endsWith("vcf.gz") },
+                { assert workflow.out.tbi.get(0).get(1).endsWith("tbi") },
                 { assert snapshot(
-                    workflow.out.versions,
+                    path(workflow.out.vcf.get(0).get(1)).linesGzip,
                     file(workflow.out.tbi.get(0).get(1)).name,
-                    path(workflow.out.vcf.get(0).get(1)).linesGzip[48..118], // Stable
-                    path(workflow.out.vcf.get(0).get(1)).linesGzip[121..150] // Stable
                 ).match() }
             )
         }
 
     }
 
-    test("bcf, db, vep_cache, '110', -stub") {
+    test("1 sample -stub") {
 
         options "-stub"
-
         when {
-            params {
-            }
             workflow {
                 """
-                input[0] = SHORT_VARIANT_CALLING.out.combined_bcf
-                input[1] = [
-                    file(params.pipelines_testdata_base_path + 'nallo/reference/cadd.v1.6.hg38.test_data.zip', checkIfExists: true)
-                ]
-                input[2] = GUNZIP.out.gunzip
-                input[3] = SAMTOOLS_FAIDX.out.fai
-                input[4] = UNTAR.out.untar.map { meta, cache -> cache }
-                input[5] = Channel.value('110')
-                input[6] = [
-                    file(params.pipelines_testdata_base_path + 'nallo/reference/vep_plugin_files.csv', checkIfExists: true)
-                ]
-                input[7] = false
-                input[8] = Channel.value([])
-                input[9] = null
-                input[10] = null
+                input[0] = ANNOTATE_CSQ_PLI.out.vcf
+                input[1] = CREATE_PEDIGREE_FILE.out.ped
+                input[2] = Channel.of([
+                    [ id: 'reduced_penetrance' ],
+                    file(params.pipelines_testdata_base_path + 'nallo/reference/reduced_penetrance.tsv', checkIfExists: true)
+                ])
+                input[3] = Channel.of([
+                    [ id: 'score_config_snv' ],
+                    file(params.pipelines_testdata_base_path + 'nallo/reference/rank_model_snv.ini', checkIfExists: true)
+                ])
                 """
             }
         }
@@ -148,11 +181,9 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(
-                    workflow.out.versions,
-                    workflow.out.tbi,
-                    workflow.out.vcf
-                ).match() }
+                { assert workflow.out.vcf.get(0).get(1).endsWith("vcf.gz") },
+                { assert workflow.out.tbi.get(0).get(1).endsWith("tbi") },
+                { assert snapshot(workflow.out).match() }
             )
         }
 

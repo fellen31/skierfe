@@ -7,17 +7,18 @@ include { TABIX_TABIX as TABIX_VEP                    } from '../../../modules/n
 workflow SNV_ANNOTATION {
 
     take:
-    ch_vcf                // channel [mandatory] [ val(meta), path(vcf) ]
-    ch_databases          // channel: [mandatory] [ val(meta), path(db) ]
-    ch_fasta              // channel: [mandatory] [ val(meta), path(fasta) ]
-    ch_fai                // channel: [mandatory] [ val(meta), path(fai) ]
-    ch_vep_cache          // channel: [mandatory] [ path(cache) ]
-    val_vep_cache_version // string: [mandatory] default: 110
-    ch_vep_extra_files    // channel: [mandatory] [ path(files) ]
-    val_annotate_cadd     // bool: [mandatory]
-    ch_cadd_header        // channel: [mandatory] [ path(txt) ]
-    ch_cadd_resources     // channel: [mandatory] [ path(annotation) ]
-    ch_cadd_prescored     // channel: [mandatory] [ path(prescored) ]
+    ch_vcf                     // channel [mandatory] [ val(meta), path(vcf) ]
+    ch_databases               // channel: [mandatory] [ val(meta), path(db) ]
+    ch_fasta                   // channel: [mandatory] [ val(meta), path(fasta) ]
+    ch_fai                     // channel: [mandatory] [ val(meta), path(fai) ]
+    ch_vep_cache               // channel: [mandatory] [ path(cache) ]
+    val_vep_cache_version      // string: [mandatory] default: 110
+    val_vep_extra_files        // bool: [mandatory]
+    ch_vep_extra_files_unsplit // channel: [mandatory] [ path(csv) ]
+    val_annotate_cadd          // bool: [mandatory]
+    ch_cadd_header             // channel: [mandatory] [ path(txt) ]
+    ch_cadd_resources          // channel: [mandatory] [ path(annotation) ]
+    ch_cadd_prescored          // channel: [mandatory] [ path(prescored) ]
 
     main:
     ch_versions = Channel.empty()
@@ -52,6 +53,24 @@ workflow SNV_ANNOTATION {
             .set { ch_vep_in }
 
     }
+
+    // Read and store paths in the vep_plugin_files file
+    if (val_vep_extra_files) {
+        ch_vep_extra_files_unsplit.splitCsv ( header:true )
+            .map { row ->
+                path = file(row.vep_files[0])
+                if(path.isFile() || path.isDirectory()){
+                    return [path]
+                } else {
+                    error("\nVep database file ${path} does not exist.")
+                }
+            }
+            .collect()
+            .set { ch_vep_extra_files }
+    } else {
+        ch_vep_extra_files = Channel.value([])
+    }
+
 
     ENSEMBLVEP_VEP (
         ch_vep_in,

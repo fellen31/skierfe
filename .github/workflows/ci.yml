@@ -60,6 +60,8 @@ jobs:
           - "SHORT_VARIANT_CALLING"
           - "SNV_ANNOTATION"
           - "CALL_SVS"
+          - "RANK_VARIANTS"
+          - "SCATTER_GENOME"
           - "samplesheet"
           - "samplesheet_multisample_bam"
         profile:
