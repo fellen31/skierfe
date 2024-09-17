@@ -1,3 +1,4 @@
+import jdk.internal.vm.vector.VectorSupport$ShuffleIotaOperation
 include { fromSamplesheet } from 'plugin/nf-validation'
 
 /*
@@ -41,6 +42,7 @@ include { SAMTOOLS_MERGE                          } from '../modules/nf-core/sam
 include { BCFTOOLS_CONCAT                         } from '../modules/nf-core/bcftools/concat/main'
 include { BCFTOOLS_PLUGINSPLIT                    } from '../modules/nf-core/bcftools/pluginsplit/main'
 include { BCFTOOLS_STATS                          } from '../modules/nf-core/bcftools/stats/main'
+include { BCFTOOLS_VIEW as BCFTOOLS_FILTER_PASS   } from '../modules/nf-core/bcftools/view/main'
 include { MINIMAP2_ALIGN                          } from '../modules/nf-core/minimap2/align/main'
 include { MULTIQC                                 } from '../modules/nf-core/multiqc/main'
 include { SPLITUBAM                               } from '../modules/nf-core/splitubam/main'
@@ -440,7 +442,16 @@ workflow NALLO {
             //
             if(!params.skip_phasing_wf) {
 
-                PHASING( SHORT_VARIANT_CALLING.out.snp_calls_vcf, CALL_SVS.out.ch_sv_calls_vcf, bam_bai, fasta, fai)
+                // Filter PASS variants
+                BCFTOOLS_FILTER_PASS (
+                    SHORT_VARIANT_CALLING.out.snp_calls_vcf.map { meta, vcf -> [ meta, vcf, [] ] },
+                    [],
+                    [],
+                    []
+                )
+                ch_versions = ch_versions.mix(BCFTOOLS_FILTER_PASS.out.versions)
+
+                PHASING( BCFTOOLS_FILTER_PASS.out.vcf, CALL_SVS.out.ch_sv_calls_vcf, bam_bai, fasta, fai)
                 ch_versions = ch_versions.mix(PHASING.out.versions)
 
                 ch_multiqc_files = ch_multiqc_files.mix(PHASING.out.stats.collect{it[1]}.ifEmpty([]))
