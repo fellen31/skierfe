@@ -5,7 +5,7 @@
                 "0": [
                     [
                         {
-                            "id": "test",
+                            "id": "test:md5,d41d8cd98f00b204e9800998ecf8427e",
                             "single_end": false
                         },
                         "test_norm_singlesample.vcf.gz:md5,8d1b64c0eed7eb66dd3294fcbc15b4a1"
@@ -14,7 +14,7 @@
                 "1": [
                     [
                         {
-                            "id": "test",
+                            "id": "test:md5,d41d8cd98f00b204e9800998ecf8427e",
                             "single_end": false
                         },
                         "test_norm_singlesample.vcf.gz.tbi:md5,41ab8f51ac55e08b2339feb5a6b40764"
@@ -27,22 +27,16 @@
                             "project": null,
                             "contains_affected": false
                         },
-                        "genome.bed_norm_multisample.vcf.gz:md5,56d662f0a527803ae72e40625c01014b"
+                        "genome.bed.vcf:md5,195426ebd583896115fcf78bfecbd9f2"
                     ]
                 ],
                 "3": [
-                    [
-                        {
-                            "id": "genome.bed",
-                            "project": null,
-                            "contains_affected": false
-                        },
-                        "genome.bed_norm_multisample.vcf.gz.csi:md5,53e24fb59fef3bee6291c474e20200b9"
-                    ]
+                    
                 ],
                 "4": [
                     "versions.yml:md5,0ca81f5e441a48c6c650a07c7045ed34",
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
+                    "versions.yml:md5,4cc3d41c069a8739916c98834c001f7a",
                     "versions.yml:md5,77dbd5f16ae8b59d09563a07be6faa44",
                     "versions.yml:md5,7d9ebdfc24f293b07e70dd2d18f44022",
                     "versions.yml:md5,afe349eb9156445b91cacdcfaabcf43d",
@@ -55,23 +49,16 @@
                             "project": null,
                             "contains_affected": false
                         },
-                        "genome.bed_norm_multisample.vcf.gz:md5,56d662f0a527803ae72e40625c01014b"
+                        "genome.bed.vcf:md5,195426ebd583896115fcf78bfecbd9f2"
                     ]
                 ],
                 "combined_csi": [
-                    [
-                        {
-                            "id": "genome.bed",
-                            "project": null,
-                            "contains_affected": false
-                        },
-                        "genome.bed_norm_multisample.vcf.gz.csi:md5,53e24fb59fef3bee6291c474e20200b9"
-                    ]
+                    
                 ],
                 "snp_calls_tbi": [
                     [
                         {
-                            "id": "test",
+                            "id": "test:md5,d41d8cd98f00b204e9800998ecf8427e",
                             "single_end": false
                         },
                         "test_norm_singlesample.vcf.gz.tbi:md5,41ab8f51ac55e08b2339feb5a6b40764"
@@ -80,7 +67,7 @@
                 "snp_calls_vcf": [
                     [
                         {
-                            "id": "test",
+                            "id": "test:md5,d41d8cd98f00b204e9800998ecf8427e",
                             "single_end": false
                         },
                         "test_norm_singlesample.vcf.gz:md5,8d1b64c0eed7eb66dd3294fcbc15b4a1"
@@ -89,6 +76,7 @@
                 "versions": [
                     "versions.yml:md5,0ca81f5e441a48c6c650a07c7045ed34",
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
+                    "versions.yml:md5,4cc3d41c069a8739916c98834c001f7a",
                     "versions.yml:md5,77dbd5f16ae8b59d09563a07be6faa44",
                     "versions.yml:md5,7d9ebdfc24f293b07e70dd2d18f44022",
                     "versions.yml:md5,afe349eb9156445b91cacdcfaabcf43d",
@@ -100,7 +88,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-09-20T09:13:58.152956123"
+        "timestamp": "2024-09-30T17:03:05.925109487"
     },
     "1 sample - 2 bed, fasta, fai, bed, [] - stub": {
         "content": [
@@ -108,7 +96,7 @@
                 "0": [
                     [
                         {
-                            "id": "test",
+                            "id": "test:md5,d41d8cd98f00b204e9800998ecf8427e",
                             "single_end": false
                         },
                         "test_norm_singlesample.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
@@ -117,7 +105,7 @@
                 "1": [
                     [
                         {
-                            "id": "test",
+                            "id": "test:md5,d41d8cd98f00b204e9800998ecf8427e",
                             "single_end": false
                         },
                         "test_norm_singlesample.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
@@ -130,7 +118,7 @@
                             "project": null,
                             "contains_affected": false
                         },
-                        "genome.bed_norm_multisample.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "genome.bed.vcf:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ],
                     [
                         {
@@ -138,32 +126,19 @@
                             "project": null,
                             "contains_affected": false
                         },
-                        "genome.multi_intervals.bed_norm_multisample.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "genome.multi_intervals.bed.vcf:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "3": [
-                    [
-                        {
-                            "id": "genome.bed",
-                            "project": null,
-                            "contains_affected": false
-                        },
-                        "genome.bed_norm_multisample.vcf.gz.csi:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ],
-                    [
-                        {
-                            "id": "genome.multi_intervals.bed",
-                            "project": null,
-                            "contains_affected": false
-                        },
-                        "genome.multi_intervals.bed_norm_multisample.vcf.gz.csi:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
+                    
                 ],
                 "4": [
                     "versions.yml:md5,0ca81f5e441a48c6c650a07c7045ed34",
                     "versions.yml:md5,0ca81f5e441a48c6c650a07c7045ed34",
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
+                    "versions.yml:md5,4cc3d41c069a8739916c98834c001f7a",
+                    "versions.yml:md5,4cc3d41c069a8739916c98834c001f7a",
                     "versions.yml:md5,77dbd5f16ae8b59d09563a07be6faa44",
                     "versions.yml:md5,7d9ebdfc24f293b07e70dd2d18f44022",
                     "versions.yml:md5,afe349eb9156445b91cacdcfaabcf43d",
@@ -178,7 +153,7 @@
                             "project": null,
                             "contains_affected": false
                         },
-                        "genome.bed_norm_multisample.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "genome.bed.vcf:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ],
                     [
                         {
@@ -186,31 +161,16 @@
                             "project": null,
                             "contains_affected": false
                         },
-                        "genome.multi_intervals.bed_norm_multisample.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "genome.multi_intervals.bed.vcf:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "combined_csi": [
-                    [
-                        {
-                            "id": "genome.bed",
-                            "project": null,
-                            "contains_affected": false
-                        },
-                        "genome.bed_norm_multisample.vcf.gz.csi:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ],
-                    [
-                        {
-                            "id": "genome.multi_intervals.bed",
-                            "project": null,
-                            "contains_affected": false
-                        },
-                        "genome.multi_intervals.bed_norm_multisample.vcf.gz.csi:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
+                    
                 ],
                 "snp_calls_tbi": [
                     [
                         {
-                            "id": "test",
+                            "id": "test:md5,d41d8cd98f00b204e9800998ecf8427e",
                             "single_end": false
                         },
                         "test_norm_singlesample.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
@@ -219,7 +179,7 @@
                 "snp_calls_vcf": [
                     [
                         {
-                            "id": "test",
+                            "id": "test:md5,d41d8cd98f00b204e9800998ecf8427e",
                             "single_end": false
                         },
                         "test_norm_singlesample.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
@@ -230,6 +190,8 @@
                     "versions.yml:md5,0ca81f5e441a48c6c650a07c7045ed34",
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
+                    "versions.yml:md5,4cc3d41c069a8739916c98834c001f7a",
+                    "versions.yml:md5,4cc3d41c069a8739916c98834c001f7a",
                     "versions.yml:md5,77dbd5f16ae8b59d09563a07be6faa44",
                     "versions.yml:md5,7d9ebdfc24f293b07e70dd2d18f44022",
                     "versions.yml:md5,afe349eb9156445b91cacdcfaabcf43d",
@@ -243,7 +205,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-09-20T09:16:49.165250859"
+        "timestamp": "2024-09-30T17:06:03.701088344"
     },
     "1 sample - 1 bed, fasta, fai, bed, []": {
         "content": [
@@ -251,7 +213,7 @@
                 "0": [
                     [
                         {
-                            "id": "test",
+                            "id": "test:md5,d41d8cd98f00b204e9800998ecf8427e",
                             "single_end": false
                         },
                         "test_norm_singlesample.vcf.gz:md5,8d1b64c0eed7eb66dd3294fcbc15b4a1"
@@ -260,7 +222,7 @@
                 "1": [
                     [
                         {
-                            "id": "test",
+                            "id": "test:md5,d41d8cd98f00b204e9800998ecf8427e",
                             "single_end": false
                         },
                         "test_norm_singlesample.vcf.gz.tbi:md5,41ab8f51ac55e08b2339feb5a6b40764"
@@ -273,22 +235,16 @@
                             "project": null,
                             "contains_affected": false
                         },
-                        "genome.bed_norm_multisample.vcf.gz:md5,56d662f0a527803ae72e40625c01014b"
+                        "genome.bed.vcf:md5,a8cfb08bd72ca1dca39a99af02552f78"
                     ]
                 ],
                 "3": [
-                    [
-                        {
-                            "id": "genome.bed",
-                            "project": null,
-                            "contains_affected": false
-                        },
-                        "genome.bed_norm_multisample.vcf.gz.csi:md5,53e24fb59fef3bee6291c474e20200b9"
-                    ]
+                    
                 ],
                 "4": [
                     "versions.yml:md5,0ca81f5e441a48c6c650a07c7045ed34",
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
+                    "versions.yml:md5,4cc3d41c069a8739916c98834c001f7a",
                     "versions.yml:md5,77dbd5f16ae8b59d09563a07be6faa44",
                     "versions.yml:md5,7d9ebdfc24f293b07e70dd2d18f44022",
                     "versions.yml:md5,afe349eb9156445b91cacdcfaabcf43d",
@@ -301,23 +257,16 @@
                             "project": null,
                             "contains_affected": false
                         },
-                        "genome.bed_norm_multisample.vcf.gz:md5,56d662f0a527803ae72e40625c01014b"
+                        "genome.bed.vcf:md5,a8cfb08bd72ca1dca39a99af02552f78"
                     ]
                 ],
                 "combined_csi": [
-                    [
-                        {
-                            "id": "genome.bed",
-                            "project": null,
-                            "contains_affected": false
-                        },
-                        "genome.bed_norm_multisample.vcf.gz.csi:md5,53e24fb59fef3bee6291c474e20200b9"
-                    ]
+                    
                 ],
                 "snp_calls_tbi": [
                     [
                         {
-                            "id": "test",
+                            "id": "test:md5,d41d8cd98f00b204e9800998ecf8427e",
                             "single_end": false
                         },
                         "test_norm_singlesample.vcf.gz.tbi:md5,41ab8f51ac55e08b2339feb5a6b40764"
@@ -326,7 +275,7 @@
                 "snp_calls_vcf": [
                     [
                         {
-                            "id": "test",
+                            "id": "test:md5,d41d8cd98f00b204e9800998ecf8427e",
                             "single_end": false
                         },
                         "test_norm_singlesample.vcf.gz:md5,8d1b64c0eed7eb66dd3294fcbc15b4a1"
@@ -335,6 +284,7 @@
                 "versions": [
                     "versions.yml:md5,0ca81f5e441a48c6c650a07c7045ed34",
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
+                    "versions.yml:md5,4cc3d41c069a8739916c98834c001f7a",
                     "versions.yml:md5,77dbd5f16ae8b59d09563a07be6faa44",
                     "versions.yml:md5,7d9ebdfc24f293b07e70dd2d18f44022",
                     "versions.yml:md5,afe349eb9156445b91cacdcfaabcf43d",
@@ -346,7 +296,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-09-20T09:14:27.319216407"
+        "timestamp": "2024-09-30T17:03:36.103723597"
     },
     "2 samples - 2 bed, fasta, fai, bed, par_bed": {
         "content": [
@@ -354,7 +304,7 @@
                 "0": [
                     [
                         {
-                            "id": "test",
+                            "id": "test:md5,d41d8cd98f00b204e9800998ecf8427e",
                             "single_end": false
                         },
                         "test_norm_singlesample.vcf.gz:md5,f8e492c9c4d6e0cb027b300bb3f7155a"
@@ -370,7 +320,7 @@
                 "1": [
                     [
                         {
-                            "id": "test",
+                            "id": "test:md5,d41d8cd98f00b204e9800998ecf8427e",
                             "single_end": false
                         },
                         "test_norm_singlesample.vcf.gz.tbi:md5,f1d5f7e2321e7f0534d251c12b373221"
@@ -390,7 +340,7 @@
                             "project": null,
                             "contains_affected": false
                         },
-                        "genome.bed_norm_multisample.vcf.gz:md5,ec12cca4d6849a5f47823331c4b9a8f3"
+                        "genome.bed.vcf:md5,efe87d13cb4f51b7b6c53597a6ab6344"
                     ],
                     [
                         {
@@ -398,26 +348,11 @@
                             "project": null,
                             "contains_affected": false
                         },
-                        "genome.multi_intervals.bed_norm_multisample.vcf.gz:md5,ec12cca4d6849a5f47823331c4b9a8f3"
+                        "genome.multi_intervals.bed.vcf:md5,2435f30765448e54b9424af279915e24"
                     ]
                 ],
                 "3": [
-                    [
-                        {
-                            "id": "genome.bed",
-                            "project": null,
-                            "contains_affected": false
-                        },
-                        "genome.bed_norm_multisample.vcf.gz.csi:md5,12d9802de9b9e071408e526930050626"
-                    ],
-                    [
-                        {
-                            "id": "genome.multi_intervals.bed",
-                            "project": null,
-                            "contains_affected": false
-                        },
-                        "genome.multi_intervals.bed_norm_multisample.vcf.gz.csi:md5,12d9802de9b9e071408e526930050626"
-                    ]
+                    
                 ],
                 "4": [
                     "versions.yml:md5,0ca81f5e441a48c6c650a07c7045ed34",
@@ -426,6 +361,8 @@
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
+                    "versions.yml:md5,4cc3d41c069a8739916c98834c001f7a",
+                    "versions.yml:md5,4cc3d41c069a8739916c98834c001f7a",
                     "versions.yml:md5,77dbd5f16ae8b59d09563a07be6faa44",
                     "versions.yml:md5,77dbd5f16ae8b59d09563a07be6faa44",
                     "versions.yml:md5,7d9ebdfc24f293b07e70dd2d18f44022",
@@ -442,7 +379,7 @@
                             "project": null,
                             "contains_affected": false
                         },
-                        "genome.bed_norm_multisample.vcf.gz:md5,ec12cca4d6849a5f47823331c4b9a8f3"
+                        "genome.bed.vcf:md5,efe87d13cb4f51b7b6c53597a6ab6344"
                     ],
                     [
                         {
@@ -450,31 +387,16 @@
                             "project": null,
                             "contains_affected": false
                         },
-                        "genome.multi_intervals.bed_norm_multisample.vcf.gz:md5,ec12cca4d6849a5f47823331c4b9a8f3"
+                        "genome.multi_intervals.bed.vcf:md5,2435f30765448e54b9424af279915e24"
                     ]
                 ],
                 "combined_csi": [
-                    [
-                        {
-                            "id": "genome.bed",
-                            "project": null,
-                            "contains_affected": false
-                        },
-                        "genome.bed_norm_multisample.vcf.gz.csi:md5,12d9802de9b9e071408e526930050626"
-                    ],
-                    [
-                        {
-                            "id": "genome.multi_intervals.bed",
-                            "project": null,
-                            "contains_affected": false
-                        },
-                        "genome.multi_intervals.bed_norm_multisample.vcf.gz.csi:md5,12d9802de9b9e071408e526930050626"
-                    ]
+                    
                 ],
                 "snp_calls_tbi": [
                     [
                         {
-                            "id": "test",
+                            "id": "test:md5,d41d8cd98f00b204e9800998ecf8427e",
                             "single_end": false
                         },
                         "test_norm_singlesample.vcf.gz.tbi:md5,f1d5f7e2321e7f0534d251c12b373221"
@@ -490,7 +412,7 @@
                 "snp_calls_vcf": [
                     [
                         {
-                            "id": "test",
+                            "id": "test:md5,d41d8cd98f00b204e9800998ecf8427e",
                             "single_end": false
                         },
                         "test_norm_singlesample.vcf.gz:md5,f8e492c9c4d6e0cb027b300bb3f7155a"
@@ -510,6 +432,8 @@
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
+                    "versions.yml:md5,4cc3d41c069a8739916c98834c001f7a",
+                    "versions.yml:md5,4cc3d41c069a8739916c98834c001f7a",
                     "versions.yml:md5,77dbd5f16ae8b59d09563a07be6faa44",
                     "versions.yml:md5,77dbd5f16ae8b59d09563a07be6faa44",
                     "versions.yml:md5,7d9ebdfc24f293b07e70dd2d18f44022",
@@ -525,7 +449,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-09-20T09:16:06.366289968"
+        "timestamp": "2024-09-30T17:05:17.87353547"
     },
     "2 samples - 2 bed, fasta, fai, bed, [] - stub": {
         "content": [
@@ -533,7 +457,7 @@
                 "0": [
                     [
                         {
-                            "id": "test",
+                            "id": "test:md5,d41d8cd98f00b204e9800998ecf8427e",
                             "single_end": false
                         },
                         "test_norm_singlesample.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
@@ -549,7 +473,7 @@
                 "1": [
                     [
                         {
-                            "id": "test",
+                            "id": "test:md5,d41d8cd98f00b204e9800998ecf8427e",
                             "single_end": false
                         },
                         "test_norm_singlesample.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
@@ -569,7 +493,7 @@
                             "project": null,
                             "contains_affected": false
                         },
-                        "genome.bed_norm_multisample.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "genome.bed.vcf:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ],
                     [
                         {
@@ -577,26 +501,11 @@
                             "project": null,
                             "contains_affected": false
                         },
-                        "genome.multi_intervals.bed_norm_multisample.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "genome.multi_intervals.bed.vcf:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "3": [
-                    [
-                        {
-                            "id": "genome.bed",
-                            "project": null,
-                            "contains_affected": false
-                        },
-                        "genome.bed_norm_multisample.vcf.gz.csi:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ],
-                    [
-                        {
-                            "id": "genome.multi_intervals.bed",
-                            "project": null,
-                            "contains_affected": false
-                        },
-                        "genome.multi_intervals.bed_norm_multisample.vcf.gz.csi:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
+                    
                 ],
                 "4": [
                     "versions.yml:md5,0ca81f5e441a48c6c650a07c7045ed34",
@@ -605,6 +514,8 @@
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
+                    "versions.yml:md5,4cc3d41c069a8739916c98834c001f7a",
+                    "versions.yml:md5,4cc3d41c069a8739916c98834c001f7a",
                     "versions.yml:md5,77dbd5f16ae8b59d09563a07be6faa44",
                     "versions.yml:md5,77dbd5f16ae8b59d09563a07be6faa44",
                     "versions.yml:md5,7d9ebdfc24f293b07e70dd2d18f44022",
@@ -621,7 +532,7 @@
                             "project": null,
                             "contains_affected": false
                         },
-                        "genome.bed_norm_multisample.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "genome.bed.vcf:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ],
                     [
                         {
@@ -629,31 +540,16 @@
                             "project": null,
                             "contains_affected": false
                         },
-                        "genome.multi_intervals.bed_norm_multisample.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "genome.multi_intervals.bed.vcf:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "combined_csi": [
-                    [
-                        {
-                            "id": "genome.bed",
-                            "project": null,
-                            "contains_affected": false
-                        },
-                        "genome.bed_norm_multisample.vcf.gz.csi:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ],
-                    [
-                        {
-                            "id": "genome.multi_intervals.bed",
-                            "project": null,
-                            "contains_affected": false
-                        },
-                        "genome.multi_intervals.bed_norm_multisample.vcf.gz.csi:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
+                    
                 ],
                 "snp_calls_tbi": [
                     [
                         {
-                            "id": "test",
+                            "id": "test:md5,d41d8cd98f00b204e9800998ecf8427e",
                             "single_end": false
                         },
                         "test_norm_singlesample.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
@@ -669,7 +565,7 @@
                 "snp_calls_vcf": [
                     [
                         {
-                            "id": "test",
+                            "id": "test:md5,d41d8cd98f00b204e9800998ecf8427e",
                             "single_end": false
                         },
                         "test_norm_singlesample.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
@@ -689,6 +585,8 @@
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
+                    "versions.yml:md5,4cc3d41c069a8739916c98834c001f7a",
+                    "versions.yml:md5,4cc3d41c069a8739916c98834c001f7a",
                     "versions.yml:md5,77dbd5f16ae8b59d09563a07be6faa44",
                     "versions.yml:md5,77dbd5f16ae8b59d09563a07be6faa44",
                     "versions.yml:md5,7d9ebdfc24f293b07e70dd2d18f44022",
@@ -704,7 +602,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-09-20T09:17:01.14095623"
+        "timestamp": "2024-09-30T17:06:16.544937179"
     },
     "2 samples - 2 bed, fasta, fai, bed, par_bed - stub": {
         "content": [
@@ -712,7 +610,7 @@
                 "0": [
                     [
                         {
-                            "id": "test",
+                            "id": "test:md5,d41d8cd98f00b204e9800998ecf8427e",
                             "single_end": false
                         },
                         "test_norm_singlesample.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
@@ -728,7 +626,7 @@
                 "1": [
                     [
                         {
-                            "id": "test",
+                            "id": "test:md5,d41d8cd98f00b204e9800998ecf8427e",
                             "single_end": false
                         },
                         "test_norm_singlesample.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
@@ -748,7 +646,7 @@
                             "project": null,
                             "contains_affected": false
                         },
-                        "genome.bed_norm_multisample.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "genome.bed.vcf:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ],
                     [
                         {
@@ -756,26 +654,11 @@
                             "project": null,
                             "contains_affected": false
                         },
-                        "genome.multi_intervals.bed_norm_multisample.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "genome.multi_intervals.bed.vcf:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "3": [
-                    [
-                        {
-                            "id": "genome.bed",
-                            "project": null,
-                            "contains_affected": false
-                        },
-                        "genome.bed_norm_multisample.vcf.gz.csi:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ],
-                    [
-                        {
-                            "id": "genome.multi_intervals.bed",
-                            "project": null,
-                            "contains_affected": false
-                        },
-                        "genome.multi_intervals.bed_norm_multisample.vcf.gz.csi:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
+                    
                 ],
                 "4": [
                     "versions.yml:md5,0ca81f5e441a48c6c650a07c7045ed34",
@@ -784,6 +667,8 @@
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
+                    "versions.yml:md5,4cc3d41c069a8739916c98834c001f7a",
+                    "versions.yml:md5,4cc3d41c069a8739916c98834c001f7a",
                     "versions.yml:md5,77dbd5f16ae8b59d09563a07be6faa44",
                     "versions.yml:md5,77dbd5f16ae8b59d09563a07be6faa44",
                     "versions.yml:md5,7d9ebdfc24f293b07e70dd2d18f44022",
@@ -800,7 +685,7 @@
                             "project": null,
                             "contains_affected": false
                         },
-                        "genome.bed_norm_multisample.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "genome.bed.vcf:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ],
                     [
                         {
@@ -808,31 +693,16 @@
                             "project": null,
                             "contains_affected": false
                         },
-                        "genome.multi_intervals.bed_norm_multisample.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "genome.multi_intervals.bed.vcf:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "combined_csi": [
-                    [
-                        {
-                            "id": "genome.bed",
-                            "project": null,
-                            "contains_affected": false
-                        },
-                        "genome.bed_norm_multisample.vcf.gz.csi:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ],
-                    [
-                        {
-                            "id": "genome.multi_intervals.bed",
-                            "project": null,
-                            "contains_affected": false
-                        },
-                        "genome.multi_intervals.bed_norm_multisample.vcf.gz.csi:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
+                    
                 ],
                 "snp_calls_tbi": [
                     [
                         {
-                            "id": "test",
+                            "id": "test:md5,d41d8cd98f00b204e9800998ecf8427e",
                             "single_end": false
                         },
                         "test_norm_singlesample.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
@@ -848,7 +718,7 @@
                 "snp_calls_vcf": [
                     [
                         {
-                            "id": "test",
+                            "id": "test:md5,d41d8cd98f00b204e9800998ecf8427e",
                             "single_end": false
                         },
                         "test_norm_singlesample.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
@@ -868,6 +738,8 @@
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
+                    "versions.yml:md5,4cc3d41c069a8739916c98834c001f7a",
+                    "versions.yml:md5,4cc3d41c069a8739916c98834c001f7a",
                     "versions.yml:md5,77dbd5f16ae8b59d09563a07be6faa44",
                     "versions.yml:md5,77dbd5f16ae8b59d09563a07be6faa44",
                     "versions.yml:md5,7d9ebdfc24f293b07e70dd2d18f44022",
@@ -883,7 +755,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-09-20T09:17:13.216410221"
+        "timestamp": "2024-09-30T17:06:30.332393829"
     },
     "1 sample - 1 bed, fasta, fai, bed, [] - stub": {
         "content": [
@@ -891,7 +763,7 @@
                 "0": [
                     [
                         {
-                            "id": "test",
+                            "id": "test:md5,d41d8cd98f00b204e9800998ecf8427e",
                             "single_end": false
                         },
                         "test_norm_singlesample.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
@@ -900,7 +772,7 @@
                 "1": [
                     [
                         {
-                            "id": "test",
+                            "id": "test:md5,d41d8cd98f00b204e9800998ecf8427e",
                             "single_end": false
                         },
                         "test_norm_singlesample.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
@@ -913,22 +785,16 @@
                             "project": null,
                             "contains_affected": false
                         },
-                        "genome.bed_norm_multisample.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "genome.bed.vcf:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "3": [
-                    [
-                        {
-                            "id": "genome.bed",
-                            "project": null,
-                            "contains_affected": false
-                        },
-                        "genome.bed_norm_multisample.vcf.gz.csi:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
+                    
                 ],
                 "4": [
                     "versions.yml:md5,0ca81f5e441a48c6c650a07c7045ed34",
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
+                    "versions.yml:md5,4cc3d41c069a8739916c98834c001f7a",
                     "versions.yml:md5,77dbd5f16ae8b59d09563a07be6faa44",
                     "versions.yml:md5,7d9ebdfc24f293b07e70dd2d18f44022",
                     "versions.yml:md5,afe349eb9156445b91cacdcfaabcf43d",
@@ -941,23 +807,16 @@
                             "project": null,
                             "contains_affected": false
                         },
-                        "genome.bed_norm_multisample.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "genome.bed.vcf:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "combined_csi": [
-                    [
-                        {
-                            "id": "genome.bed",
-                            "project": null,
-                            "contains_affected": false
-                        },
-                        "genome.bed_norm_multisample.vcf.gz.csi:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
+                    
                 ],
                 "snp_calls_tbi": [
                     [
                         {
-                            "id": "test",
+                            "id": "test:md5,d41d8cd98f00b204e9800998ecf8427e",
                             "single_end": false
                         },
                         "test_norm_singlesample.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
@@ -966,7 +825,7 @@
                 "snp_calls_vcf": [
                     [
                         {
-                            "id": "test",
+                            "id": "test:md5,d41d8cd98f00b204e9800998ecf8427e",
                             "single_end": false
                         },
                         "test_norm_singlesample.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
@@ -975,6 +834,7 @@
                 "versions": [
                     "versions.yml:md5,0ca81f5e441a48c6c650a07c7045ed34",
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
+                    "versions.yml:md5,4cc3d41c069a8739916c98834c001f7a",
                     "versions.yml:md5,77dbd5f16ae8b59d09563a07be6faa44",
                     "versions.yml:md5,7d9ebdfc24f293b07e70dd2d18f44022",
                     "versions.yml:md5,afe349eb9156445b91cacdcfaabcf43d",
@@ -986,7 +846,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-09-20T09:16:38.070360001"
+        "timestamp": "2024-09-30T17:05:51.82583086"
     },
     "1 sample - no bed, fasta, fai, [], []": {
         "content": [
@@ -994,7 +854,7 @@
                 "0": [
                     [
                         {
-                            "id": "test",
+                            "id": "test:md5,d41d8cd98f00b204e9800998ecf8427e",
                             "single_end": false
                         },
                         "test_norm_singlesample.vcf.gz:md5,8d1b64c0eed7eb66dd3294fcbc15b4a1"
@@ -1003,7 +863,7 @@
                 "1": [
                     [
                         {
-                            "id": "test",
+                            "id": "test:md5,d41d8cd98f00b204e9800998ecf8427e",
                             "single_end": false
                         },
                         "test_norm_singlesample.vcf.gz.tbi:md5,41ab8f51ac55e08b2339feb5a6b40764"
@@ -1013,29 +873,21 @@
                     [
                         {
                             "id": [
-
+                                
                             ],
                             "project": null,
                             "contains_affected": false
                         },
-                        "[]_norm_multisample.vcf.gz:md5,56d662f0a527803ae72e40625c01014b"
+                        "[].vcf:md5,fcb10632a4ceb256d57fd4236f8a3190"
                     ]
                 ],
                 "3": [
-                    [
-                        {
-                            "id": [
-
-                            ],
-                            "project": null,
-                            "contains_affected": false
-                        },
-                        "[]_norm_multisample.vcf.gz.csi:md5,53e24fb59fef3bee6291c474e20200b9"
-                    ]
+                    
                 ],
                 "4": [
                     "versions.yml:md5,0ca81f5e441a48c6c650a07c7045ed34",
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
+                    "versions.yml:md5,4cc3d41c069a8739916c98834c001f7a",
                     "versions.yml:md5,77dbd5f16ae8b59d09563a07be6faa44",
                     "versions.yml:md5,7d9ebdfc24f293b07e70dd2d18f44022",
                     "versions.yml:md5,afe349eb9156445b91cacdcfaabcf43d",
@@ -1045,30 +897,21 @@
                     [
                         {
                             "id": [
-
+                                
                             ],
                             "project": null,
                             "contains_affected": false
                         },
-                        "[]_norm_multisample.vcf.gz:md5,56d662f0a527803ae72e40625c01014b"
+                        "[].vcf:md5,fcb10632a4ceb256d57fd4236f8a3190"
                     ]
                 ],
                 "combined_csi": [
-                    [
-                        {
-                            "id": [
-
-                            ],
-                            "project": null,
-                            "contains_affected": false
-                        },
-                        "[]_norm_multisample.vcf.gz.csi:md5,53e24fb59fef3bee6291c474e20200b9"
-                    ]
+                    
                 ],
                 "snp_calls_tbi": [
                     [
                         {
-                            "id": "test",
+                            "id": "test:md5,d41d8cd98f00b204e9800998ecf8427e",
                             "single_end": false
                         },
                         "test_norm_singlesample.vcf.gz.tbi:md5,41ab8f51ac55e08b2339feb5a6b40764"
@@ -1077,7 +920,7 @@
                 "snp_calls_vcf": [
                     [
                         {
-                            "id": "test",
+                            "id": "test:md5,d41d8cd98f00b204e9800998ecf8427e",
                             "single_end": false
                         },
                         "test_norm_singlesample.vcf.gz:md5,8d1b64c0eed7eb66dd3294fcbc15b4a1"
@@ -1086,6 +929,7 @@
                 "versions": [
                     "versions.yml:md5,0ca81f5e441a48c6c650a07c7045ed34",
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
+                    "versions.yml:md5,4cc3d41c069a8739916c98834c001f7a",
                     "versions.yml:md5,77dbd5f16ae8b59d09563a07be6faa44",
                     "versions.yml:md5,7d9ebdfc24f293b07e70dd2d18f44022",
                     "versions.yml:md5,afe349eb9156445b91cacdcfaabcf43d",
@@ -1097,7 +941,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-09-20T09:13:29.038685117"
+        "timestamp": "2024-09-30T17:02:35.747524869"
     },
     "1 sample - 2 bed, fasta, fai, bed, []": {
         "content": [
@@ -1105,7 +949,7 @@
                 "0": [
                     [
                         {
-                            "id": "test",
+                            "id": "test:md5,d41d8cd98f00b204e9800998ecf8427e",
                             "single_end": false
                         },
                         "test_norm_singlesample.vcf.gz:md5,f8e492c9c4d6e0cb027b300bb3f7155a"
@@ -1114,7 +958,7 @@
                 "1": [
                     [
                         {
-                            "id": "test",
+                            "id": "test:md5,d41d8cd98f00b204e9800998ecf8427e",
                             "single_end": false
                         },
                         "test_norm_singlesample.vcf.gz.tbi:md5,f1d5f7e2321e7f0534d251c12b373221"
@@ -1127,7 +971,7 @@
                             "project": null,
                             "contains_affected": false
                         },
-                        "genome.bed_norm_multisample.vcf.gz:md5,56d662f0a527803ae72e40625c01014b"
+                        "genome.bed.vcf:md5,3692bd9a29e5c3713ae518b98eb90047"
                     ],
                     [
                         {
@@ -1135,32 +979,19 @@
                             "project": null,
                             "contains_affected": false
                         },
-                        "genome.multi_intervals.bed_norm_multisample.vcf.gz:md5,56d662f0a527803ae72e40625c01014b"
+                        "genome.multi_intervals.bed.vcf:md5,4e4abf52206e56a463a4493c02ba828b"
                     ]
                 ],
                 "3": [
-                    [
-                        {
-                            "id": "genome.bed",
-                            "project": null,
-                            "contains_affected": false
-                        },
-                        "genome.bed_norm_multisample.vcf.gz.csi:md5,53e24fb59fef3bee6291c474e20200b9"
-                    ],
-                    [
-                        {
-                            "id": "genome.multi_intervals.bed",
-                            "project": null,
-                            "contains_affected": false
-                        },
-                        "genome.multi_intervals.bed_norm_multisample.vcf.gz.csi:md5,53e24fb59fef3bee6291c474e20200b9"
-                    ]
+                    
                 ],
                 "4": [
                     "versions.yml:md5,0ca81f5e441a48c6c650a07c7045ed34",
                     "versions.yml:md5,0ca81f5e441a48c6c650a07c7045ed34",
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
+                    "versions.yml:md5,4cc3d41c069a8739916c98834c001f7a",
+                    "versions.yml:md5,4cc3d41c069a8739916c98834c001f7a",
                     "versions.yml:md5,77dbd5f16ae8b59d09563a07be6faa44",
                     "versions.yml:md5,7d9ebdfc24f293b07e70dd2d18f44022",
                     "versions.yml:md5,afe349eb9156445b91cacdcfaabcf43d",
@@ -1175,7 +1006,7 @@
                             "project": null,
                             "contains_affected": false
                         },
-                        "genome.bed_norm_multisample.vcf.gz:md5,56d662f0a527803ae72e40625c01014b"
+                        "genome.bed.vcf:md5,3692bd9a29e5c3713ae518b98eb90047"
                     ],
                     [
                         {
@@ -1183,31 +1014,16 @@
                             "project": null,
                             "contains_affected": false
                         },
-                        "genome.multi_intervals.bed_norm_multisample.vcf.gz:md5,56d662f0a527803ae72e40625c01014b"
+                        "genome.multi_intervals.bed.vcf:md5,4e4abf52206e56a463a4493c02ba828b"
                     ]
                 ],
                 "combined_csi": [
-                    [
-                        {
-                            "id": "genome.bed",
-                            "project": null,
-                            "contains_affected": false
-                        },
-                        "genome.bed_norm_multisample.vcf.gz.csi:md5,53e24fb59fef3bee6291c474e20200b9"
-                    ],
-                    [
-                        {
-                            "id": "genome.multi_intervals.bed",
-                            "project": null,
-                            "contains_affected": false
-                        },
-                        "genome.multi_intervals.bed_norm_multisample.vcf.gz.csi:md5,53e24fb59fef3bee6291c474e20200b9"
-                    ]
+                    
                 ],
                 "snp_calls_tbi": [
                     [
                         {
-                            "id": "test",
+                            "id": "test:md5,d41d8cd98f00b204e9800998ecf8427e",
                             "single_end": false
                         },
                         "test_norm_singlesample.vcf.gz.tbi:md5,f1d5f7e2321e7f0534d251c12b373221"
@@ -1216,7 +1032,7 @@
                 "snp_calls_vcf": [
                     [
                         {
-                            "id": "test",
+                            "id": "test:md5,d41d8cd98f00b204e9800998ecf8427e",
                             "single_end": false
                         },
                         "test_norm_singlesample.vcf.gz:md5,f8e492c9c4d6e0cb027b300bb3f7155a"
@@ -1227,6 +1043,8 @@
                     "versions.yml:md5,0ca81f5e441a48c6c650a07c7045ed34",
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
+                    "versions.yml:md5,4cc3d41c069a8739916c98834c001f7a",
+                    "versions.yml:md5,4cc3d41c069a8739916c98834c001f7a",
                     "versions.yml:md5,77dbd5f16ae8b59d09563a07be6faa44",
                     "versions.yml:md5,7d9ebdfc24f293b07e70dd2d18f44022",
                     "versions.yml:md5,afe349eb9156445b91cacdcfaabcf43d",
@@ -1240,7 +1058,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-09-20T09:14:58.277461525"
+        "timestamp": "2024-09-30T17:04:08.234122862"
     },
     "2 samples - 2 bed, fasta, fai, bed, []": {
         "content": [
@@ -1248,7 +1066,7 @@
                 "0": [
                     [
                         {
-                            "id": "test",
+                            "id": "test:md5,d41d8cd98f00b204e9800998ecf8427e",
                             "single_end": false
                         },
                         "test_norm_singlesample.vcf.gz:md5,f8e492c9c4d6e0cb027b300bb3f7155a"
@@ -1264,7 +1082,7 @@
                 "1": [
                     [
                         {
-                            "id": "test",
+                            "id": "test:md5,d41d8cd98f00b204e9800998ecf8427e",
                             "single_end": false
                         },
                         "test_norm_singlesample.vcf.gz.tbi:md5,f1d5f7e2321e7f0534d251c12b373221"
@@ -1284,7 +1102,7 @@
                             "project": null,
                             "contains_affected": false
                         },
-                        "genome.bed_norm_multisample.vcf.gz:md5,ec12cca4d6849a5f47823331c4b9a8f3"
+                        "genome.bed.vcf:md5,8dd91642bfacdbb5bceb2eab9ee0f512"
                     ],
                     [
                         {
@@ -1292,26 +1110,11 @@
                             "project": null,
                             "contains_affected": false
                         },
-                        "genome.multi_intervals.bed_norm_multisample.vcf.gz:md5,ec12cca4d6849a5f47823331c4b9a8f3"
+                        "genome.multi_intervals.bed.vcf:md5,3dff9972ea420f7940226f4fe51d76a8"
                     ]
                 ],
                 "3": [
-                    [
-                        {
-                            "id": "genome.bed",
-                            "project": null,
-                            "contains_affected": false
-                        },
-                        "genome.bed_norm_multisample.vcf.gz.csi:md5,12d9802de9b9e071408e526930050626"
-                    ],
-                    [
-                        {
-                            "id": "genome.multi_intervals.bed",
-                            "project": null,
-                            "contains_affected": false
-                        },
-                        "genome.multi_intervals.bed_norm_multisample.vcf.gz.csi:md5,12d9802de9b9e071408e526930050626"
-                    ]
+                    
                 ],
                 "4": [
                     "versions.yml:md5,0ca81f5e441a48c6c650a07c7045ed34",
@@ -1320,6 +1123,8 @@
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
+                    "versions.yml:md5,4cc3d41c069a8739916c98834c001f7a",
+                    "versions.yml:md5,4cc3d41c069a8739916c98834c001f7a",
                     "versions.yml:md5,77dbd5f16ae8b59d09563a07be6faa44",
                     "versions.yml:md5,77dbd5f16ae8b59d09563a07be6faa44",
                     "versions.yml:md5,7d9ebdfc24f293b07e70dd2d18f44022",
@@ -1336,7 +1141,7 @@
                             "project": null,
                             "contains_affected": false
                         },
-                        "genome.bed_norm_multisample.vcf.gz:md5,ec12cca4d6849a5f47823331c4b9a8f3"
+                        "genome.bed.vcf:md5,8dd91642bfacdbb5bceb2eab9ee0f512"
                     ],
                     [
                         {
@@ -1344,31 +1149,16 @@
                             "project": null,
                             "contains_affected": false
                         },
-                        "genome.multi_intervals.bed_norm_multisample.vcf.gz:md5,ec12cca4d6849a5f47823331c4b9a8f3"
+                        "genome.multi_intervals.bed.vcf:md5,3dff9972ea420f7940226f4fe51d76a8"
                     ]
                 ],
                 "combined_csi": [
-                    [
-                        {
-                            "id": "genome.bed",
-                            "project": null,
-                            "contains_affected": false
-                        },
-                        "genome.bed_norm_multisample.vcf.gz.csi:md5,12d9802de9b9e071408e526930050626"
-                    ],
-                    [
-                        {
-                            "id": "genome.multi_intervals.bed",
-                            "project": null,
-                            "contains_affected": false
-                        },
-                        "genome.multi_intervals.bed_norm_multisample.vcf.gz.csi:md5,12d9802de9b9e071408e526930050626"
-                    ]
+                    
                 ],
                 "snp_calls_tbi": [
                     [
                         {
-                            "id": "test",
+                            "id": "test:md5,d41d8cd98f00b204e9800998ecf8427e",
                             "single_end": false
                         },
                         "test_norm_singlesample.vcf.gz.tbi:md5,f1d5f7e2321e7f0534d251c12b373221"
@@ -1384,7 +1174,7 @@
                 "snp_calls_vcf": [
                     [
                         {
-                            "id": "test",
+                            "id": "test:md5,d41d8cd98f00b204e9800998ecf8427e",
                             "single_end": false
                         },
                         "test_norm_singlesample.vcf.gz:md5,f8e492c9c4d6e0cb027b300bb3f7155a"
@@ -1404,6 +1194,8 @@
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
+                    "versions.yml:md5,4cc3d41c069a8739916c98834c001f7a",
+                    "versions.yml:md5,4cc3d41c069a8739916c98834c001f7a",
                     "versions.yml:md5,77dbd5f16ae8b59d09563a07be6faa44",
                     "versions.yml:md5,77dbd5f16ae8b59d09563a07be6faa44",
                     "versions.yml:md5,7d9ebdfc24f293b07e70dd2d18f44022",
@@ -1419,7 +1211,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-09-20T09:15:32.21563308"
+        "timestamp": "2024-09-30T17:04:42.797584189"
     },
     "1 sample - no bed, fasta, fai, [], [] - stub": {
         "content": [
@@ -1427,7 +1219,7 @@
                 "0": [
                     [
                         {
-                            "id": "test",
+                            "id": "test:md5,d41d8cd98f00b204e9800998ecf8427e",
                             "single_end": false
                         },
                         "test_norm_singlesample.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
@@ -1436,7 +1228,7 @@
                 "1": [
                     [
                         {
-                            "id": "test",
+                            "id": "test:md5,d41d8cd98f00b204e9800998ecf8427e",
                             "single_end": false
                         },
                         "test_norm_singlesample.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
@@ -1446,29 +1238,21 @@
                     [
                         {
                             "id": [
-
+                                
                             ],
                             "project": null,
                             "contains_affected": false
                         },
-                        "[]_norm_multisample.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "[].vcf:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "3": [
-                    [
-                        {
-                            "id": [
-
-                            ],
-                            "project": null,
-                            "contains_affected": false
-                        },
-                        "[]_norm_multisample.vcf.gz.csi:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
+                    
                 ],
                 "4": [
                     "versions.yml:md5,0ca81f5e441a48c6c650a07c7045ed34",
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
+                    "versions.yml:md5,4cc3d41c069a8739916c98834c001f7a",
                     "versions.yml:md5,77dbd5f16ae8b59d09563a07be6faa44",
                     "versions.yml:md5,7d9ebdfc24f293b07e70dd2d18f44022",
                     "versions.yml:md5,afe349eb9156445b91cacdcfaabcf43d",
@@ -1478,30 +1262,21 @@
                     [
                         {
                             "id": [
-
+                                
                             ],
                             "project": null,
                             "contains_affected": false
                         },
-                        "[]_norm_multisample.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "[].vcf:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "combined_csi": [
-                    [
-                        {
-                            "id": [
-
-                            ],
-                            "project": null,
-                            "contains_affected": false
-                        },
-                        "[]_norm_multisample.vcf.gz.csi:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
+                    
                 ],
                 "snp_calls_tbi": [
                     [
                         {
-                            "id": "test",
+                            "id": "test:md5,d41d8cd98f00b204e9800998ecf8427e",
                             "single_end": false
                         },
                         "test_norm_singlesample.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
@@ -1510,7 +1285,7 @@
                 "snp_calls_vcf": [
                     [
                         {
-                            "id": "test",
+                            "id": "test:md5,d41d8cd98f00b204e9800998ecf8427e",
                             "single_end": false
                         },
                         "test_norm_singlesample.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
@@ -1519,6 +1294,7 @@
                 "versions": [
                     "versions.yml:md5,0ca81f5e441a48c6c650a07c7045ed34",
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
+                    "versions.yml:md5,4cc3d41c069a8739916c98834c001f7a",
                     "versions.yml:md5,77dbd5f16ae8b59d09563a07be6faa44",
                     "versions.yml:md5,7d9ebdfc24f293b07e70dd2d18f44022",
                     "versions.yml:md5,afe349eb9156445b91cacdcfaabcf43d",
@@ -1530,7 +1306,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-09-20T09:16:16.776853798"
+        "timestamp": "2024-09-30T17:05:29.041813359"
     },
     "1 sample - 1 bed, fasta, fai, [], [] - stub": {
         "content": [
@@ -1538,7 +1314,7 @@
                 "0": [
                     [
                         {
-                            "id": "test",
+                            "id": "test:md5,d41d8cd98f00b204e9800998ecf8427e",
                             "single_end": false
                         },
                         "test_norm_singlesample.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
@@ -1547,7 +1323,7 @@
                 "1": [
                     [
                         {
-                            "id": "test",
+                            "id": "test:md5,d41d8cd98f00b204e9800998ecf8427e",
                             "single_end": false
                         },
                         "test_norm_singlesample.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
@@ -1560,22 +1336,16 @@
                             "project": null,
                             "contains_affected": false
                         },
-                        "genome.bed_norm_multisample.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "genome.bed.vcf:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "3": [
-                    [
-                        {
-                            "id": "genome.bed",
-                            "project": null,
-                            "contains_affected": false
-                        },
-                        "genome.bed_norm_multisample.vcf.gz.csi:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
+                    
                 ],
                 "4": [
                     "versions.yml:md5,0ca81f5e441a48c6c650a07c7045ed34",
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
+                    "versions.yml:md5,4cc3d41c069a8739916c98834c001f7a",
                     "versions.yml:md5,77dbd5f16ae8b59d09563a07be6faa44",
                     "versions.yml:md5,7d9ebdfc24f293b07e70dd2d18f44022",
                     "versions.yml:md5,afe349eb9156445b91cacdcfaabcf43d",
@@ -1588,23 +1358,16 @@
                             "project": null,
                             "contains_affected": false
                         },
-                        "genome.bed_norm_multisample.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "genome.bed.vcf:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "combined_csi": [
-                    [
-                        {
-                            "id": "genome.bed",
-                            "project": null,
-                            "contains_affected": false
-                        },
-                        "genome.bed_norm_multisample.vcf.gz.csi:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
+                    
                 ],
                 "snp_calls_tbi": [
                     [
                         {
-                            "id": "test",
+                            "id": "test:md5,d41d8cd98f00b204e9800998ecf8427e",
                             "single_end": false
                         },
                         "test_norm_singlesample.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
@@ -1613,7 +1376,7 @@
                 "snp_calls_vcf": [
                     [
                         {
-                            "id": "test",
+                            "id": "test:md5,d41d8cd98f00b204e9800998ecf8427e",
                             "single_end": false
                         },
                         "test_norm_singlesample.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
@@ -1622,6 +1385,7 @@
                 "versions": [
                     "versions.yml:md5,0ca81f5e441a48c6c650a07c7045ed34",
                     "versions.yml:md5,13101c9283d4a82e859574b0a981311c",
+                    "versions.yml:md5,4cc3d41c069a8739916c98834c001f7a",
                     "versions.yml:md5,77dbd5f16ae8b59d09563a07be6faa44",
                     "versions.yml:md5,7d9ebdfc24f293b07e70dd2d18f44022",
                     "versions.yml:md5,afe349eb9156445b91cacdcfaabcf43d",
@@ -1633,6 +1397,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-09-20T09:16:27.732828098"
+        "timestamp": "2024-09-30T17:05:40.537800823"
     }
 }

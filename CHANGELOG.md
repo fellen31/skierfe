@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#388](https://github.com/genomic-medicine-sweden/nallo/pull/388) - Added longphase as the default phaser
 - [#388](https://github.com/genomic-medicine-sweden/nallo/pull/388) - Added single-sample tbi output to the short variant calling subworkflow
 - [#393](https://github.com/genomic-medicine-sweden/nallo/pull/393) - Added a new `--minimap2_read_mapping_preset` parameter
+- [#](https://github.com/genomic-medicine-sweden/nallo/pull/) - Added `FOUND_IN=deepvariants` tags to SNV output
 
 ### `Changed`
 

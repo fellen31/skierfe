@@ -1,6 +1,7 @@
 //
 // Workflow to call and merge SNVs
 //
+include { ADD_FOUND_IN_TAG                            } from '../../../modules/local/add_found_in_tag/main'
 include { BCFTOOLS_CONCAT                             } from '../../../modules/nf-core/bcftools/concat/main'
 include { BCFTOOLS_FILLTAGS                           } from '../../../modules/local/bcftools/filltags/main'
 include { BCFTOOLS_NORM as BCFTOOLS_NORM_MULTISAMPLE  } from '../../../modules/nf-core/bcftools/norm/main'
@@ -92,10 +93,16 @@ workflow SHORT_VARIANT_CALLING {
     BCFTOOLS_NORM_MULTISAMPLE ( bcftools_norm_in, ch_fasta )
     ch_versions = ch_versions.mix(BCFTOOLS_NORM_MULTISAMPLE.out.versions)
 
+    ADD_FOUND_IN_TAG (
+        BCFTOOLS_NORM_MULTISAMPLE.out.vcf.map { meta, vcf -> [ meta, vcf, [] ] },
+        "deepvariant"
+    )
+    ch_versions = ch_versions.mix(ADD_FOUND_IN_TAG.out.versions)
+
     emit:
     snp_calls_vcf = BCFTOOLS_NORM_SINGLESAMPLE.out.vcf // channel: [ val(meta), path(vcf) ]
     snp_calls_tbi = BCFTOOLS_NORM_SINGLESAMPLE.out.tbi // channel: [ val(meta), path(tbi) ]
-    combined_bcf  = BCFTOOLS_NORM_MULTISAMPLE.out.vcf  // channel: [ val(meta), path(bcf) ]
-    combined_csi  = BCFTOOLS_NORM_MULTISAMPLE.out.csi  // channel: [ val(meta), path(csi) ]
+    combined_bcf  = ADD_FOUND_IN_TAG.out.vcf           // channel: [ val(meta), path(bcf) ]
+    combined_csi  = ADD_FOUND_IN_TAG.out.csi           // channel: [ val(meta), path(csi) ]
     versions      = ch_versions                        // channel: [ path(versions.yml) ]
 }
