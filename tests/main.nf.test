@@ -300,7 +300,7 @@ nextflow_pipeline {
         }
     }
 
-    test("test profile - multisample - ont - parallel_alignments 2 - parallel_snv 1") {
+    test("test profile - multisample - ont - parallel_alignments 1 - parallel_snv 1") {
         tag "samplesheet_multisample_ont_bam"
 
         when {
@@ -309,7 +309,7 @@ nextflow_pipeline {
                 input                        = params.pipelines_testdata_base_path + 'testdata/samplesheet_multisample_bam_ont.csv'
                 outdir                       = "$outputDir"
                 preset                       = 'ONT_R10'
-                parallel_alignments          = 2
+                parallel_alignments          = 1
                 parallel_snv                 = 1
                 phaser                       = "whatshap"
             }
