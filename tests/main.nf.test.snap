@@ -60,7 +60,7 @@
             "test.ped:md5,24d8694d580f782ed77d4d1b5c6f6fb4",
             "multiqc_citations.txt:md5,a27affce20d456d20ed387097a4f0350",
             "multiqc_fastqc.txt:md5,37674ae5d0d56386d87f38158fa18980",
-            "1938e1d531e51115a315755c40a647a",
+            "d10b4e7d13f0eb7015b8436229c8c3ec",
             "5df05408bd4f18a4ef1555bc5800601a",
             "HG002_Revio_A.asm.bp.hap1.p_ctg.assembly_summary:md5,e4da3107f2421d42c6e2f59bff4e47d9",
             "HG002_Revio_A.asm.bp.hap2.p_ctg.assembly_summary:md5,bf908610472e602fd986b9d4a4d58b9e",
@@ -144,14 +144,14 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-17T11:48:32.01331886"
+        "timestamp": "2024-10-23T09:15:09.058177016"
     },
     "test profile - multisample - ont - parallel_alignments 2 - parallel_snv 1": {
         "content": [
             "test.ped:md5,deb1ee6bd38d6e8f7cb92801d8a12f12",
             "multiqc_citations.txt:md5,a27affce20d456d20ed387097a4f0350",
             "multiqc_fastqc.txt:md5,5254c5d578af3a24182ccf3248183ac6",
-            "481f340cee26a68bf54a9d184d1649ab",
+            "73051d1003db2f0cf08f03d49583b83b",
             "53495f0b494894437c243a5c5f47c4fc",
             "HG002_ONT_A_hificnv.copynum.bedgraph:md5,4c5517c1783afa11ff93c8d8627fbe42",
             "HG002_ONT_A_hificnv.depth.bw:md5,69c333b205994200641ea539b4c277c6",
@@ -199,6 +199,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-18T12:12:22.303286236"
+        "timestamp": "2024-10-23T09:16:39.752875272"
     }
 }
