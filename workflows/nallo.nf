@@ -352,7 +352,10 @@ workflow NALLO {
                     ch_versions = ch_versions.mix(CALL_REPEAT_EXPANSIONS.out.versions)
 
                     if(!params.skip_repeat_annotation) {
-                        ANNOTATE_REPEAT_EXPANSIONS ( ch_variant_catalog, CALL_REPEAT_EXPANSIONS.out.vcf )
+                        ANNOTATE_REPEAT_EXPANSIONS (
+                            ch_variant_catalog,
+                            CALL_REPEAT_EXPANSIONS.out.family_vcf
+                        )
                         ch_versions = ch_versions.mix(ANNOTATE_REPEAT_EXPANSIONS.out.versions)
                     }
                 }

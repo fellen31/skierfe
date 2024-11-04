@@ -33,7 +33,7 @@ workflow CALL_REPEAT_EXPANSIONS {
 
     BCFTOOLS_SORT_TRGT.out.vcf
         .join( BCFTOOLS_SORT_TRGT.out.tbi )
-        .map { meta, bcf, csi -> [ [ id : 'multisample' ], bcf, csi ] }
+        .map { meta, bcf, csi -> [ [ id : meta.family ], bcf, csi ] }
         .groupTuple()
         .set{ ch_bcftools_merge_in }
 
@@ -49,7 +49,10 @@ workflow CALL_REPEAT_EXPANSIONS {
     ch_versions = ch_versions.mix(BCFTOOLS_INDEX_MERGE.out.versions)
 
     emit:
-    vcf      = BCFTOOLS_MERGE.out.merged_variants // channel: [ val(meta), path(vcf) ]
-    versions = ch_versions                        // channel: [ versions.yml ]
+    sample_vcf  = BCFTOOLS_SORT_TRGT.out.vcf         // channel: [ val(meta), path(vcf) ]
+    family_vcf  = BCFTOOLS_MERGE.out.merged_variants // channel: [ val(meta), path(vcf) ]
+    sample_bam  = SAMTOOLS_SORT_TRGT.out.bam         // channel: [ val(meta), path(bam) ]
+    sample_bai  = SAMTOOLS_INDEX_TRGT.out.bai        // channel: [ val(meta), path(bai) ]
+    versions    = ch_versions                        // channel: [ versions.yml ]
 }
 
